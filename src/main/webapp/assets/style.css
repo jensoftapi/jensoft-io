@@ -1,0 +1,62 @@
+
+/* Copyright 2015 Sébastien Janaud. All rights reserved. */
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  padding-top: 100px;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: white;
+}
+
+
+body {
+	 	margin-bottom: 60px;
+  		padding-top: 40px;
+	}
+	
+.jensoft-org header,
+.jensoft-org footer,
+.jensoft-org aside,
+.jensoft-org h1,
+.jensoft-org h2,
+.jensoft-org h3,
+.jensoft-org h4 {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.jensoft-org h1,
+.jensoft-org h2,
+.jensoft-org h3,
+.jensoft-org h4 {
+  color: #000;
+}
+
+pre { 
+    display : block;
+    padding-left : 20px;
+    padding-bottom : 10px;
+    padding-top:0;
+    border-radius : 0;
+   	background: none;
+    background-color: none;
+    border-bottom : none;
+    border-top : none;
+    border-right : none;
+    border-left-color: rgb(200,200,200);
+    border-left-width: 3px;
+}
+
+.hljs{
+	padding: 0;
+	background: white;
+}

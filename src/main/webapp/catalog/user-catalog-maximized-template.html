@@ -1,0 +1,71 @@
+<div class="row" id="divadmincatalog">
+<!-- <h4 class="h4-catalog" id="selectedCatalogTitle">Catalog</h4> -->
+<h4 class="h4-catalog" id="catalogTitle">Catalog</h4>
+
+	<div class="span12">
+						
+				<div id="divadmincatalog">
+					
+						<i class="icon-edit"></i>&nbsp;<span class="boldmarron" id="catalogSubTitle"></span><br>
+						<small><span class="colorblue1" id="catalogWelcome"></span></small>	
+									
+						<div class="form-search" style="margin-top: 20px;">
+    							<div   style="width: 100%;" class="input-prepend">
+									<span class="add-on">filter</span>
+   							 		<input  placeholder="Type 'Pie' or 'area function curve'"  style="width: 80%;" id="inputAdminSearchCatalog" onkeyup="getCatalogInstance('com.jensoft','jensoft-samples-catalog').searchCatalog();"  type="text" class="span2 search-query">
+    							</div>
+    					</div>
+						
+						<br>
+
+
+						<div class="row">
+							<div class="span2" id="img1"></div>
+							<div class="span2" id="img2"></div>
+							<div class="span2" id="img3"></div>
+							<div class="span2" id="img4"></div>
+							<div class="span2" id="img5"></div>
+							<div class="span2" id="img6"></div>
+						</div>
+						
+							<br>
+							
+<!-- 						<div class="row"> -->
+<!-- 							<div class="span6"> -->
+<!-- 		    					<div class="btn-group"> -->
+<!-- 		    						<button id="catalog-switch-views" onclick="switchCatalog('views');return false;" class="btn ">Views</button> -->
+<!-- 		    						<button id="catalog-switch-units" onclick="switchCatalog('units');return false;" class="btn ">Units</button> -->
+<!-- 		    					</div> -->
+<!-- 	    					</div> -->
+<!-- 	    					<div class="span6"> -->
+<!-- 	    						<div class=" pull-right"> -->
+<!-- 	    							<button class="btn btn-primary"  onclick="minimizeCatalog();">Minimize</button> -->
+<!-- 	    						</div> -->
+<!-- 	    					</div> -->
+<!-- 						</div> -->
+
+						<div class="row">
+							<div class="span3" style="margin: 20px 0px;margin-left: 40px;">
+		    					<div class="btn-group" >
+		    						<button id="catalog-switch-views" onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').switchCatalog('views');" class="btn ">Charts</button>
+		    						<button id="catalog-switch-units" onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').switchCatalog('units');" class="btn ">Units</button>
+		    					</div>
+	    					</div>
+	    					<div class="span6">
+	    						<div id="catalog-pagination" class="pagination pagination-centered"></div>
+	    					</div>
+	    					<div class="span3" style="margin: 20px 0px;">
+	    						<button class="btn btn-primary pull-right"  onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').minimizeCatalog();">Minimize</button>
+	    					</div>
+						</div>
+						
+						<div id="catalog-current-page"></div>
+						
+						<table class="table table-hover table-condensed">
+					    	<thead id="catalog-page-header"></thead>				   
+					    	<tbody id="catalog-page-body" ></tbody>				    
+					    </table>
+<!-- 						<div id="catalog-pagination" class="pagination  pagination-small pagination-right"></div> -->
+		</div>
+	</div>
+</div>	

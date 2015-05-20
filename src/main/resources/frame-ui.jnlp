@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="6.0+" codebase="${jnlp-codebase}"
+			href="${jnlp-href}">
+
+	<information>
+		<title>Jensoft API</title>
+		<vendor>JenSoft</vendor>
+		<homepage href="http://www.jensoftapi.com"/>
+		<icon href="${demo-splash}" kind="splash"/>
+		<description>JenSoft API</description> 
+		<description kind="short">An application showing a variety of charts that can be generated with Jensoft chart</description>
+		<description kind="tooltip">JenSoft API</description>
+		<offline-allowed/>
+	</information>
+
+	<update check="always" policy="always" />
+
+	<resources>
+	   <!-- requires 1.6+ -->
+    <!-- Oracle JVM -->
+    <java version="1.7.0_17" href="http://java.sun.com/products/autodl/j2se" java-vm-args="-ea" initial-heap-size="128m" max-heap-size="512m" />
+    <java version="1.7+"     href="http://java.sun.com/products/autodl/j2se" java-vm-args="-ea" initial-heap-size="128m" max-heap-size="512m" />
+    <java version="1.6.0_37" href="http://java.sun.com/products/autodl/j2se" java-vm-args="-ea" initial-heap-size="128m" max-heap-size="512m" />
+    <java version="1.6+"     href="http://java.sun.com/products/autodl/j2se" java-vm-args="-ea" initial-heap-size="128m" max-heap-size="512m" />
+    <!-- any vendor -->
+    <java version="1.7+"     java-vm-args="-ea" initial-heap-size="128m" max-heap-size="512m" />
+    <java version="1.6+"     java-vm-args="-ea" initial-heap-size="128m" max-heap-size="512m" />
+    <property name="jnlp.packEnabled" value="true"/>
+${ui-jar-resources}
+	</resources>
+
+	<security>
+	   <all-permissions/>
+	</security>
+	
+	<application-desc main-class="${frame-ui}">
+		<argument>${ui-class}</argument>
+	</application-desc>
+ </jnlp>

@@ -1,0 +1,137 @@
+<div style="padding-top: 40px;" class="row" id="divadmincatalog">
+<h4 class="h4-catalog" id="catalogTitle">Catalog</h4>
+	<div class="span4" id="catalogColumn2">						
+						
+						<i class="icon-leaf"></i>&nbsp;<span class="boldmarron">Meta</span><br>
+						<table  style="margin-top:4px" class="table table-hover table-condensed">
+					    
+					    	<tbody>
+								<tr>
+									<td width="40%"><small>Catalog Name</small></td>
+									<td id="catalog-name"></td>
+								</tr>
+								<tr>
+									<td width="40%"><small>Description</small></td>
+									<td id="catalog-description"></td>
+								</tr>
+								<tr>
+									<td width="40%"> <small>Group Name</small></td>
+									<td id="catalog-group"></td>
+								</tr>
+								<tr>
+									<td width="40%"><small>Artifact Name</small></td>
+									<td id="catalog-artifact"></td>
+								</tr>
+								<tr>
+									<td width="40%"><small>Catalog Version</small></td>
+									<td id="catalog-version"></span></td>
+								</tr>
+								<tr>
+									<td width="40%"><small>Core Version</small></td>
+									<td id="catalog-core"></span></td>
+								</tr>
+								<tr>
+									<td width="40%"><small>View & Dashboard</small></td>
+									<td id="catalog-views-size"><span class="boldorange">NA</span></td>
+								</tr>
+								<tr>
+									<td width="40%"><small>Chart Type Units</small></td>
+									<td id="catalog-units-size"><span class="boldorange">NA</span></td>
+								</tr>
+								<tr>
+									<td width="40%"><small>Last Search</small></td>
+									<td id="catalog-search-messsage"><span class="boldblue1"><small>no search sequence yet!<small></span></td>
+								</tr>
+							</tbody>				    
+					    </table>
+					    
+					    <i class="icon-share"></i>&nbsp;<span class="boldmarron">Intro Demo</span><br>
+					    <table style="margin-top:4px" class="table table-hover table-condensed">
+					    
+						    <tbody id="catalog-view-demo">
+						    	<tr>
+								<td width="50%"><small>Demo</small></td>
+								<td><small><a href="#"  id="catalog-intro" style="text-align: right;" >Intro Web Start</a></small></td>
+							</tr>
+							
+							</tbody>
+						</table>
+						
+						<i class="icon-file"></i>&nbsp;<span class="boldmarron">Notes</span><br>
+					    <table style="margin-top:4px" class="table table-hover table-condensed">
+					    
+						    <tbody id="catalog-view-notes">
+						    	<tr>
+									<td width="50%"><small>Release note</small></td>
+									<td><small><a href="#" id="catalog-release-note" onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').openReleaseNote();" style="text-align: right;" >Release note</a></small></td>
+								</tr>
+								<tr>
+									<td width="50%"><small>License note</small></td>
+									<td><small><a href="#" id="catalog-license-note" onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').openLicenseNote();" style="text-align: right;" >License note</a></small></td>
+								</tr>
+							
+							</tbody>
+						</table>
+						
+						<i class="icon-check"></i>&nbsp;<span class="boldmarron">What's new!?</span><br>
+						<table class="table table-hover table-condensed">
+					    	<thead id="catalog-new-page-header"></thead>				   
+					    	<tbody id="catalog-new-page-body" ></tbody>				    
+					    </table>
+					    
+					    <div id="catalogMxMenuHolder"></div>
+	</div>
+	
+	<div class="span8" id="catalogColumn2">
+				
+				<div id="catalogMxHolder"></div>
+				
+				<div id="divadmincatalog">
+											
+						<i class="icon-edit"></i>&nbsp;<span class="boldmarron" id="catalogSubTitle"></span><br>
+						<small><span class="colorblue1" id="catalogWelcome"></span></small>
+						
+						<div class="form-search" style="margin-top: 20px;">
+    							<div   style="width: 100%;" class="input-prepend">
+									<span class="add-on">filter</span>
+   							 		<input  placeholder="Type 'Pie' or 'area function curve'"  style="width: 80%;" id="inputAdminSearchCatalog" onkeyup="getCatalogInstance('com.jensoft','jensoft-samples-catalog').searchCatalog();"  type="text" class="span2 search-query">
+    							</div>
+    					</div>
+						
+						<br>
+
+
+						<div class="row">
+							<div class="span2" id="img1"></div>
+							<div class="span2" id="img2"></div>
+							<div class="span2" id="img3"></div>
+							<div class="span2" id="img4"></div>
+						</div>
+						
+							<br>
+							
+						<div class="row">
+							<div class="span2" style="margin: 20px 0px;margin-left: 40px;">
+		    					<div class="btn-group" >
+		    						<button id="catalog-switch-views" onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').switchCatalog('views');" class="btn ">Charts</button>
+		    						<button id="catalog-switch-units" onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').switchCatalog('units');" class="btn ">Units</button>
+		    					</div>
+	    					</div>
+	    					<div class="span4">
+	    						<div id="catalog-pagination" class="pagination pagination-centered"></div>
+	    					</div>
+	    					<div class="span2" style="margin: 20px 0px;">
+	    						<button class="btn btn-primary pull-right"  onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').maximizeCatalog('all');">Maximize</button>
+	    					</div>
+						</div>
+
+						<div id="catalog-current-page"></div>
+						
+						<table class="table table-hover table-condensed">
+					    	<thead id="catalog-page-header"></thead>				   
+					    	<tbody id="catalog-page-body" ></tbody>				    
+					    </table>
+						
+		</div>
+	</div>
+</div>	

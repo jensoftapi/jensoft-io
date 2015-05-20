@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<script type="text/javascript">document.domain = "www.jensoftapi.com";</script>
+<title>Java Charts Library - JenSoft</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Java Chart Framework"/>
+<meta name="keywords" content="jensoft,api,java, javascript,svg,chart,chart library,Data visualization,graph"/>
+<meta name="author" content="JenSoftAPI"/>
+<link rel="icon" type="image/png" href="/site/images/favicon.png" />
+
+<link href="/site/css/bootstrap.css" rel="stylesheet">
+<link href="/site/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/site/css/jensoft-style.css" rel="stylesheet">
+<link href="/site/google-code-prettify/prettify.css" rel="stylesheet">
+<link href="/site/css/alertify.bootstrap.css" rel="stylesheet">
+<link href="/site/css/alertify.core.css" rel="stylesheet">
+<script type="text/javascript" src="/site/js/jquery183.min.js"></script>
+<script type="text/javascript" src="/site/js/bootstrap.js"></script>
+<script type="text/javascript" src="/site/js/jquery.highlight-4.js"></script>
+<script type="text/javascript" src="/site/js/popover-extra-placements.js"></script>
+<script type="text/javascript" src="/site/google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="/site/js/alertify.min.js"></script>
+<script type="text/javascript" src="/site/module/jensoft-web-application.js"></script>
+<script type="text/javascript" src="/site/module/jslib/jensoft-pager.js"></script>
+
+<script type="text/javascript">
+JenSoft.Context.path ='/site';
+JenSoft.CatalogServer ='';
+//https://localhost:8443/catalog/com/jensoft/jensoft-samples-catalog/api/view/com.jensoft.catalog.views.stripe.StripeMultiplierSample/image
+$.getScript('/site/module/'+WebModules.Catalog.path)
+.done(function( script, textStatus ) {
+	
+	var catalog = new JenSoft.Catalog({container :'placeHolderPane',group :'com.jensoft', artifact:'jensoft-samples-catalog'});
+	catalog.openCatalog();
+})
+.fail(function( jqxhr, settings, exception ) {
+	console.error('failed load module : '+module.name+' with error '+exception);
+});
+
+
+
+</script>
+
+	
+<style type="text/css">
+.size {
+	display: inline-block;
+	width:300 px;
+	height:200 px;
+}
+.border-red {
+	border:1px solid red;
+}
+</style>
+</head>
+
+<body>
+<div id="content">
+ 	<div class="container responsive">
+		<div class="row responsive">
+			<div class="span12">		
+					<div class="row responsive">
+							<div class="span12" style="padding-top: 40px;" id="placeHolderPane"></div>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+</div>
+
+</html>
