@@ -4,66 +4,53 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="javascript charts">
+    <meta name="description" content="java charts data visualization">
     <meta name="author" content="Sébastien Janaud">
 	<link rel="icon" type="image/png" href="assets/creep-001.png" />
-    <title>JenSoft - Java Chart library</title>
-    
-    
-    <style type="text/css">
-    body {
-  padding-top: 40px;
-	}
+    <title>Java Chart library - JenSoft</title>
 
-    </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
- <link rel="stylesheet" href="assets/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 	<link rel="stylesheet" href="assets/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/color-brewer.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script> 
+    <script type="text/javascript" src="assets/jquery.highlight-4.js"></script>
     <script src="catalog/user-catalog-module.js"></script>
-    
-    
-  </head>
-
-  <body>
-
-
-<div style="padding-left: 200px;">
-<h1>JenSoft - Java  Chart / Data Visualization</h1>
-<small>Sébastien Janaud - 2015 - Java / JS Dataviz chart frameworks </small><br>
-
-<small>Ref : <a href="https://github.com/sjanaud" target="_blank">GitHub</a>&nbsp;-&nbsp;
+</head>
+<body>
+<div class="container">
+<h1>JenSoft - Java  Chart &#38; Data Visualization</h1>
+<small><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>&nbsp;Sébastien Janaud - 2015 - Java Data visualization chart Blog</small><br>
+<small><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;Ref : <a href="https://github.com/sjanaud" target="_blank">GitHub</a>&nbsp;-&nbsp;
 <a href="https://fr.linkedin.com/in/sebastienjanaud" target="_blank">LinkedIn</a>&nbsp;-&nbsp;
 <a href="http://www.jensoftapi.com" target="_blank">JenSoft APIs</a>&nbsp;-&nbsp;
-<a href="https://twitter.com/jensoftapi" target="_blank">Twitter</a></small><br>
+<a href="https://twitter.com/jensoftapi" target="_blank">Twitter</a>&nbsp;-&nbsp;
+<a href="http://jenscript.io" target="_blank">JenScript</a>
+</small><br>
 
 
 
 <div style="padding-top: 20px;">
 <h4>JenSoft - Java Charts Library</h4> 
-<p>
-	<a href="catalog">Catalog</a><br>
-</p>
 </div>
 
-<div style="padding-top: 40px;" id="placeHolderPane"></div>
-
-
+<div id="content">
+	<div class="row">
+			<div class="col-md-12" style="padding-top: 40px;" id="placeHolderPane"></div>
+	</div>
 </div>
 
+</div>
 <script type="text/javascript">
-var catalog = new JenSoft.Catalog({container :'placeHolderPane',group :'org.jensoft', artifact:'jensoft-samples'});
-catalog.openCatalog();
+	var catalog = new JenSoft.Catalog({container :'placeHolderPane',group :'org.jensoft', artifact:'jensoft-samples'});
+	catalog.openCatalog();
 </script>
-   
-  </body>
+</body>
 </html>
