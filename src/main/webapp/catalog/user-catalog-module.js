@@ -199,9 +199,11 @@ JenSoft.Catalog = function(config){
 		});
 	}
 	
-	function displayTitle(){
-		$("#catalogTitle").html('Catalog  '+CatalogDef.name);
-		$("#catalogSubTitle").html(CatalogDef.name+' browser');
+	function displayTitle(title){
+		//$("#catalogTitle").html('Catalog  '+CatalogDef.name);
+		if(title === undefined)
+			title = CatalogDef.name;
+		$("#catalogSubTitle").html('/'+title);
 		$("#catalogWelcome").html(
 				'You are in the catalog of group <strong>'+
 				CatalogDef.group+'</strong> with artifact <strong>'+
@@ -946,7 +948,7 @@ JenSoft.Catalog = function(config){
 				
 				 	$('#catalogUnitTitle').text("Unit : "+unit);
 				 
-				 	displayTitle();
+				 	displayTitle(unit);
 				 	
 					//displayLabelMeta();
 					displayLabelMetaUnit();
@@ -1114,7 +1116,7 @@ JenSoft.Catalog = function(config){
 			
 			$(".popover").remove();
 			
-			displayTitle();
+			displayTitle(viewClass);
 			
 			//displayLabelMeta();
 			displayLabelMetaView(viewClass,viewPackage);

@@ -27,16 +27,46 @@
 <body>
 <div class="container">
 <h1>JenSoft <span style="color : rgb(22, 125, 218);">Doc.</span></h1>
-<h1><span style="color : rgb(22, 125, 218);font-size: 0.8em;">Java chart and visualization library.</span></h1>
+<h1><span style="color : rgb(22, 125, 218);font-size: 0.8em;">Java charts and data visualization library.</span></h1>
 <small><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>&nbsp;&nbsp;<span style="color : rgb(100,100,100)">Sébastien Janaud - 2015 Java JenSoft library documentation, articles, tutorials and resources.</span></small><br>
-<small><strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;Ref : <a href="https://github.com/sjanaud" target="_blank">GitHub</a>&nbsp;-&nbsp;
+<small><strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;&nbsp;<a href="https://github.com/sjanaud" target="_blank">GitHub</a>&nbsp;-&nbsp;
 <a href="https://fr.linkedin.com/in/sebastienjanaud" target="_blank">LinkedIn</a>&nbsp;-&nbsp;
-<a href="http://www.jensoftapi.com" target="_blank">JenSoft APIs</a>&nbsp;-&nbsp;
+<a href="http://www.jensoftapi.com" target="_blank">Frameworks</a>&nbsp;-&nbsp;
 <a href="https://twitter.com/jensoftapi" target="_blank">Twitter</a>&nbsp;-&nbsp;
 <a href="http://jenscript.io" target="_blank">JenScript</a>
 </strong></small>
 
 
+<h3>In<span style="color : rgb(22, 125, 218);">tro.</span></h3>
+<p>
+JenSoft is is a pure java framework to make java charts components. 
+API provides a complete charting solution for your Swing or Web Application. It provides advanced features
+ you've come to expect with minimal integration efforts. Framework gives developers a very flexible toolkit
+  solution for a wide variety of java chart and data visualization needs. The API can be used in many businesses
+   such as reporting, health, finance or science and technology softwares. 
+<p>
+
+<h3>Maven <span style="color : rgb(22, 125, 218);">Dependency.</span></h3>
+<h5>Core <span style="color : rgb(22, 125, 218);">API</span></h5>
+<p>
+	Core artifact 2.0.4 is available on central repository with the following dependency ids. Core artifact provides first-class comprehensive support for the newest chart developers
+</p>
+<pre ><code class="html">&lt;dependency&gt;
+    &lt;groupId&gt;org.jensoft&lt;/groupId&gt;
+    &lt;artifactId&gt;jensoft-core&lt;/artifactId&gt;
+    &lt;version&gt;2.0.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h5>Sample <span style="color : rgb(22, 125, 218);">Catalog.</span></h5>
+<p>
+	Samples artifact 2.0.4 is available on central repository with the following dependency ids. Sample catalog provides first-class comprehensive chart views for each api feature.
+</p>
+<pre ><code class="html">&lt;dependency&gt;
+    &lt;groupId&gt;org.jensoft&lt;/groupId&gt;
+    &lt;artifactId&gt;jensoft-samples&lt;/artifactId&gt;
+    &lt;version&gt;2.0.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
 
 <div id="content">
 	<div class="row">
@@ -45,7 +75,14 @@
 </div>
 
 </div>
+
+
 <script type="text/javascript">
+	$(document).ready(function() {
+		  $('pre code').each(function(i, block) {
+		    hljs.highlightBlock(block);
+		  });
+	});
 	var catalog = new JenSoft.Catalog({container :'placeHolderPane',group :'org.jensoft', artifact:'jensoft-samples'});
 	catalog.openCatalog();
 </script>
