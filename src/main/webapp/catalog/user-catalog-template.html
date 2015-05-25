@@ -2,50 +2,42 @@
 <!-- 	<h4 class="h4-catalog" id="catalogTitle">Catalog</h4> -->
 
 	
-	<div class="col-md-12" id="catalogColumn2" >
-				<div>
-						<i class="icon-edit"></i>&nbsp;<span class="boldmarron" id="catalogSubTitle"></span><br>
-						<small><span  id="catalogWelcome"></span></small>
-						
-    					<div style="padding-top: 20px;" class="input-group">
-						  <span class="input-group-addon" id="basic-addon1">filter</span>
-						  <input id="inputAdminSearchCatalog" type="text" class="form-control" placeholder="Type 'Pie' or 'area function curve'" aria-describedby="basic-addon1" onkeyup="getCatalogInstance('org.jensoft','jensoft-samples').searchCatalog();">
-						</div>
+	<div class="col-md-12">
+			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;<span class="boldmarron" id="catalogSubTitle"></span><br>
+			<small><span id="catalogWelcome"></span></small>
+			
+ 			<div style="padding-top: 20px;" class="input-group">
+			  <span class="input-group-addon" id="basic-addon1">filter</span>
+			  <input id="inputAdminSearchCatalog" type="text" class="form-control" placeholder="Type 'Pie' or 'area function curve'" aria-describedby="basic-addon1" onkeyup="getCatalogInstance('org.jensoft','jensoft-samples').searchCatalog();">
+			</div>
 
-						<div class="row" style="padding-top: 20px;">
-							<div class="col-sm-3" id="img1"></div>
-							<div class="col-sm-3" id="img2"></div>
-							<div class="col-sm-3" id="img3"></div>
-							<div class="col-sm-3" id="img4"></div>
-						</div>
-							
-						<div class="row" style="padding-top: 20px;">
-							<div class="col-sm-3" >
-		    					<div class="btn-group" role="group">
-		    						<button  type="button" id="catalog-switch-views" onclick="getCatalogInstance('org.jensoft','jensoft-samples').switchCatalog('views');" class="btn">Charts</button>
-		    						<button  type="button" id="catalog-switch-units" onclick="getCatalogInstance('org.jensoft','jensoft-samples').switchCatalog('units');" class="btn">Units</button>
-		    					</div>
-	    					</div>
-	    					<div class="col-sm-6">
-	    						<div id="catalog-pagination"></div>
-	    					</div>
-	    					<div class="col-sm-3" >
-	    						<button class="btn btn-primary dropdown-menu-right"  onclick="getCatalogInstance('org.jensoft','jensoft-samples').maximizeCatalog('all');">Maximize</button>
-	    					</div>
-						</div>
+			<div class="row" style="padding-top: 20px;">
+				<div class="col-sm-3" id="img1"></div>
+				<div class="col-sm-3" id="img2"></div>
+				<div class="col-sm-3" id="img3"></div>
+				<div class="col-sm-3" id="img4"></div>
+			</div>
+				
+			<div class="row" style="padding-top: 20px;">
+				<div class="col-sm-6" >
+   					<div class="btn-group" role="group">
+   						<button  type="button" id="catalog-switch-views" onclick="getCatalogInstance('org.jensoft','jensoft-samples').switchCatalog('views');" class="btn">Charts</button>
+   						<button  type="button" id="catalog-switch-units" onclick="getCatalogInstance('org.jensoft','jensoft-samples').switchCatalog('units');" class="btn">Units</button>
+   					</div>
+  					</div>
+  					<div class="col-sm-6">
+  						<div id="catalog-pagination"></div>
+  					</div>
+			</div>
 
-
-						<div class="row" style="padding-top: 20px;">
-							<div class="col-sm-6" ><div id="catalog-current-page"></div></div>
-							<div class="col-sm-6" ><div id="catalog-search-message"></div></div>
-						</div>
-						
-						
-						<table class="table table-hover table-condensed">
-					    	<thead id="catalog-page-header"></thead>				   
-					    	<tbody id="catalog-page-body" ></tbody>				    
-					    </table>
-						
-		</div>
+			<div class="row" style="padding-top: 20px;">
+				<div class="col-sm-6" ><div id="catalog-current-page"></div></div>
+				<div class="col-sm-6" ><div id="catalog-search-message"></div></div>
+			</div>
+			
+			<table class="table table-hover table-condensed">
+		    	<thead id="catalog-page-header"></thead>				   
+		    	<tbody id="catalog-page-body" ></tbody>				    
+		    </table>
 	</div>
 </div>	

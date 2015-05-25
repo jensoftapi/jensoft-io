@@ -26,10 +26,6 @@ prettyPrint = function(){
 	});
 };
 
-scrollToHolder = function(){
-	
-};
-
 
 var JenSoft ={};
 JenSoft.CatalogServer ='';
@@ -59,37 +55,37 @@ JenSoft.Catalog = function(config){
 	var pagesCatalogFrameStart = 0;
 	var pagesCatalogFrameEnd = 7;
 	var itemCatalogPerPage = 4;
-	var catalogSize;
-	var pageCatalogCount;
+	var catalogSize = undefined;
+	var pageCatalogCount = undefined;
 	
 	var catalogSearchPattern = config.topic ;
 
 	var conf = 'all';
 	var mode = 'views' ;
 
-	var catalog;
+	var catalog = undefined;
 
 	//current sub catalog for the open unit
 	var pageCatalogUnit = 0;
 	var pagesCatalogUnitFrameStart = 0;
 	var pagesCatalogUnitFrameEnd = 7;
 	var itemCatalogUnitPerPage = 4;
-	var catalogUnitSize;
-	var pageCatalogUnitCount;
-	var catalogUnitSearchPattern;
-	var units;
+	var catalogUnitSize = undefined;
+	var pageCatalogUnitCount = undefined;
+	var catalogUnitSearchPattern = undefined;
+	var units = undefined;
 
 
-	var maximize = false;
+	//var maximize = false;
 
-	var views;
+	var views = undefined;
 
-	var selectedUnit;
+	var selectedUnit = undefined;
 
-	var contentBeforeAccessApplet;
-	var contentBeforeAccessView;
-	var contentBeforeAccessSource;
-	var contentBeforeAccessUnit;
+	var contentBeforeAccessApplet = undefined;
+	var contentBeforeAccessView = undefined;
+	var contentBeforeAccessSource = undefined;
+	var contentBeforeAccessUnit = undefined;
 
 
 
@@ -216,8 +212,6 @@ JenSoft.Catalog = function(config){
 				'Read version <a href="#" onclick="getCatalogInstance(\'org.jensoft\',\'jensoft-samples\').openReleaseNote();" style="text-align: right;" >release note</a>&nbsp;'+
 				'and <a href="#" onclick="getCatalogInstance(\'org.jensoft\',\'jensoft-samples\').openLicenseNote();" style="text-align: right;" >license</a>'
 		);
-		
-		//checkNews();
 	}
 
 	function displayCatalogPopup(){
@@ -247,69 +241,69 @@ JenSoft.Catalog = function(config){
 	}
 
 
-	/**
-	 * maximize catalog with given conf : all or unit
-	 */
-	function maximizeCatalog(conf){
-		maximize = true;
-		pageCatalog = 0;
-		pagesCatalogFrameStart = 0;
-		pagesCatalogFrameEnd = 7;
-		itemCatalogPerPage = 6;
-		
-		pageCatalogUnit = 0;
-		pagesCatalogUnitFrameStart = 0;
-		pagesCatalogUnitFrameEnd = 7;
-		itemCatalogUnitPerPage = 6;
-		
-		if(conf == 'all'){
-			$('#'+catalogContainer).load('user-catalog-maximized-template.html',function() {		
-				if(mode == 'views'){
-					installCatalogViews();
-				}else if(mode == 'units'){
-					installCatalogUnits();
-				}
-				displayTitle();
-			});
-		}else if(conf == 'unit'){
-			openCatalogUnit($(selectedUnit).find('name').text(),false);
-			displayTitle();
-		}
-		
-	}
-
-	/**
-	 * minimize catalog
-	 */
-	function minimizeCatalog(){
-		maximize = false;
-		
-		pageCatalog = 0;
-		pagesCatalogFrameStart = 0;
-		pagesCatalogFrameEnd = 7;
-		itemCatalogPerPage = 4;
-		
-		pageCatalogUnit = 0;
-		pagesCatalogUnitFrameStart = 0;
-		pagesCatalogUnitFrameEnd = 7;
-		itemCatalogUnitPerPage = 4;
-		
-		
-		$('#'+catalogContainer).load('catalog/user-catalog-template.html',function() {		
-			if(mode == 'views'){
-				installCatalogViews();
-			}else if(mode == 'units'){
-				installCatalogUnits();
-			}
-			displayTitle();
-		});
-	}
+//	/**
+//	 * maximize catalog with given conf : all or unit
+//	 */
+//	function maximizeCatalog(conf){
+//		maximize = true;
+//		pageCatalog = 0;
+//		pagesCatalogFrameStart = 0;
+//		pagesCatalogFrameEnd = 7;
+//		itemCatalogPerPage = 6;
+//		
+//		pageCatalogUnit = 0;
+//		pagesCatalogUnitFrameStart = 0;
+//		pagesCatalogUnitFrameEnd = 7;
+//		itemCatalogUnitPerPage = 6;
+//		
+//		if(conf == 'all'){
+//			$('#'+catalogContainer).load('user-catalog-maximized-template.html',function() {		
+//				if(mode == 'views'){
+//					installCatalogViews();
+//				}else if(mode == 'units'){
+//					installCatalogUnits();
+//				}
+//				displayTitle();
+//			});
+//		}else if(conf == 'unit'){
+//			openCatalogUnit($(selectedUnit).find('name').text(),false);
+//			displayTitle();
+//		}
+//		
+//	}
+//
+//	/**
+//	 * minimize catalog
+//	 */
+//	function minimizeCatalog(){
+//		maximize = false;
+//		
+//		pageCatalog = 0;
+//		pagesCatalogFrameStart = 0;
+//		pagesCatalogFrameEnd = 7;
+//		itemCatalogPerPage = 4;
+//		
+//		pageCatalogUnit = 0;
+//		pagesCatalogUnitFrameStart = 0;
+//		pagesCatalogUnitFrameEnd = 7;
+//		itemCatalogUnitPerPage = 4;
+//		
+//		
+//		$('#'+catalogContainer).load('catalog/user-catalog-template.html',function() {		
+//			if(mode == 'views'){
+//				installCatalogViews();
+//			}else if(mode == 'units'){
+//				installCatalogUnits();
+//			}
+//			displayTitle();
+//		});
+//	}
 
 	/**
 	 * initialize frame
 	 */
 	function initFrame(){
-		maximize = false;
+	//	maximize = false;
 		pageCatalog = 0;
 		pagesCatalogFrameStart = 0;
 		pagesCatalogFrameEnd = 7;
@@ -348,24 +342,24 @@ JenSoft.Catalog = function(config){
 //	}
 
 
-	/**
-	 * install intro web start in place holder
-	 */
-	function installIntro(){
-		var introClassURI = getCatalogAPIContext()+"/intro";
-		var xhr = getConnector();		
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var introItem = xhr.responseXML;
-				//var introPackage = $(introItem).find('package').text();
-				var introClass = $(introItem).find('class').text();
-				var webStartHRef = getCatalogBase()+"/webstart/"+introClass+'.jnlp';
-				$("#catalog-intro").attr('href',webStartHRef);
-			}
-		};
-		xhr.open("GET", introClassURI, true);	
-		xhr.send();	
-	}
+//	/**
+//	 * install intro web start in place holder
+//	 */
+//	function installIntro(){
+//		var introClassURI = getCatalogAPIContext()+"/intro";
+//		var xhr = getConnector();		
+//		xhr.onreadystatechange = function() {
+//			if (xhr.readyState == 4 && xhr.status == 200) {
+//				var introItem = xhr.responseXML;
+//				//var introPackage = $(introItem).find('package').text();
+//				var introClass = $(introItem).find('class').text();
+//				var webStartHRef = getCatalogBase()+"/webstart/"+introClass+'.jnlp';
+//				$("#catalog-intro").attr('href',webStartHRef);
+//			}
+//		};
+//		xhr.open("GET", introClassURI, true);	
+//		xhr.send();	
+//	}
 
 
 
@@ -538,7 +532,6 @@ JenSoft.Catalog = function(config){
 		xhr.open("GET",viewsLookUpURI , true);
 		xhr.send();
 		
-		installIntro();
 	}
 
 	function updateCatalogPageLabelHeader(){
@@ -825,10 +818,10 @@ JenSoft.Catalog = function(config){
 		 $("#img3").html("");
 		 $("#img4").html("");
 		 
-		 if(maximize){
-			 $("#img5").html("");
-			 $("#img6").html("");
-		 }
+//		 if(maximize){
+//			 $("#img5").html("");
+//			 $("#img6").html("");
+//		 }
 	}
 
 	function clearImage(rank){
@@ -861,14 +854,14 @@ JenSoft.Catalog = function(config){
 			 if(rank==3){
 				 $("#img4").html(imageHtml);
 			 }
-			 if(maximize){
-				 if(rank==4){
-					 $("#img5").html(imageHtml);
-				 }
-				 if(rank==5){
-					 $("#img6").html(imageHtml);
-				 }
-			 }
+//			 if(maximize){
+//				 if(rank==4){
+//					 $("#img5").html(imageHtml);
+//				 }
+//				 if(rank==5){
+//					 $("#img6").html(imageHtml);
+//				 }
+//			 }
 		}else{
 			var xhr = getConnector();	
 			xhr.onreadystatechange = function() {
@@ -907,14 +900,14 @@ JenSoft.Catalog = function(config){
 							 if(rank==3){
 								 $("#img4").html(html);
 							 }
-							 if(maximize){
-								 if(rank==4){
-									 $("#img5").html(html);
-								 }
-								 if(rank==5){
-									 $("#img6").html(html);
-								 }
-							 }
+//							 if(maximize){
+//								 if(rank==4){
+//									 $("#img5").html(html);
+//								 }
+//								 if(rank==5){
+//									 $("#img6").html(html);
+//								 }
+//							 }
 						}else{
 						}
 					}
@@ -929,7 +922,7 @@ JenSoft.Catalog = function(config){
 
 	}
 
-	var popoverId;
+	//var popoverId;
 	
 	/**
 	 * display view image on link roll over
@@ -962,7 +955,6 @@ JenSoft.Catalog = function(config){
 					dashBoardviews = $(xhr.responseXML).find('view');
 					var html ='';
 					if(dashBoardviews.length > 0){
-						popoverId = row;
 						html = '';
 						if(dashBoardviews.length == 2){
 							var img1 = '<img class="img-responsive" width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
@@ -1086,13 +1078,13 @@ JenSoft.Catalog = function(config){
 	}
 
 	function buildCatalogUnit(unit){
-		 if(maximize){
-			 $('#'+catalogContainer).load('catalog/user-catalog-unit-maximized-template.html',function() {		
-				 
-				 	$('#catalogUnitTitle').text("Unit : "+unit);
-					installAdminCatalogUnitViews(unit);
-				});
-		 }else{
+//		 if(maximize){
+//			 $('#'+catalogContainer).load('catalog/user-catalog-unit-maximized-template.html',function() {		
+//				 
+//				 	$('#catalogUnitTitle').text("Unit : "+unit);
+//					installAdminCatalogUnitViews(unit);
+//				});
+//		 }else{
 			 $('#'+catalogContainer).load('catalog/user-catalog-unit-template.html',function() {		
 				
 				 	$('#catalogUnitTitle').text("Unit : "+unit);
@@ -1102,7 +1094,7 @@ JenSoft.Catalog = function(config){
 
 					installAdminCatalogUnitViews(unit);
 				});
-		 }
+		// }
 	}
 
 	function openCatalogUnit(unit,loadContent){
@@ -1265,6 +1257,8 @@ JenSoft.Catalog = function(config){
 			
 			$(".popover").remove();
 			
+			displayTitle();
+			
 			//displayLabelMeta();
 			displayLabelMetaView(viewClass,viewPackage);
 			
@@ -1297,28 +1291,28 @@ JenSoft.Catalog = function(config){
 				imageHtml = '<img class="img-responsive" width="600" height="400" src="'+imageURL+'">';
 				$("#catalog-view-image").html(imageHtml);
 				
-				var x2dExtention = $(v).find('x2d').text();
-				if(x2dExtention === 'true'){
-					$('#x2dExtentionHolder').load('user-catalog-x2d-extention.html',function() {
-						var htmlX2D = '<a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').openX2DSource(\''+viewClass+'\',\''+viewPackage+'\');">'+'X2D XML source'+'</a>';
-						$("#view-x2d-source").html(htmlX2D);
-					});
-				}
-				
-				var captchas = $(v).find('captcha');
-				if(captchas !== undefined && captchas !== null && captchas.length>0){
-					$('#captchaExtentionHolder').load('user-catalog-captcha-extention.html',function() {
-						var html ='';
-						for (var c = 0; c < captchas.length; c++) {
-							var captcha = captchas[c];
-							var q = $(captcha).find('question').text();
-							var r = $(captcha).find('response').text();
-							html = html+'<tr><td><small>'+q+'</small></td><td><small>'+r+'</small></td></tr>';
-						}
-						$('#catalog-view-captcha-extention-body').html(html);
-					});
-				}else{
-				}
+//				var x2dExtention = $(v).find('x2d').text();
+//				if(x2dExtention === 'true'){
+//					$('#x2dExtentionHolder').load('user-catalog-x2d-extention.html',function() {
+//						var htmlX2D = '<a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').openX2DSource(\''+viewClass+'\',\''+viewPackage+'\');">'+'X2D XML source'+'</a>';
+//						$("#view-x2d-source").html(htmlX2D);
+//					});
+//				}
+//				
+//				var captchas = $(v).find('captcha');
+//				if(captchas !== undefined && captchas !== null && captchas.length>0){
+//					$('#captchaExtentionHolder').load('user-catalog-captcha-extention.html',function() {
+//						var html ='';
+//						for (var c = 0; c < captchas.length; c++) {
+//							var captcha = captchas[c];
+//							var q = $(captcha).find('question').text();
+//							var r = $(captcha).find('response').text();
+//							html = html+'<tr><td><small>'+q+'</small></td><td><small>'+r+'</small></td></tr>';
+//						}
+//						$('#catalog-view-captcha-extention-body').html(html);
+//					});
+//				}else{
+//				}
 				
 			}else{
 				$("#view-applet-embedded").html('<a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').embedApplet(\'dashboard\',\''+viewClass+'\',\''+viewPackage+'\');return false;">'+'Embeded Applet'+'</a>');
@@ -1364,7 +1358,6 @@ JenSoft.Catalog = function(config){
 								 
 								var sees = $(v).find('see');
 								if(sees !== undefined && sees !== null && sees.length !== undefined && sees.length > 0){
-									alert("sees found for this view");
 //									for (var s = 0; s < sees.length; s++) {
 //										var see = sees[s];
 //										var seeClass = $(see).find('see-class').text();
@@ -1397,7 +1390,6 @@ JenSoft.Catalog = function(config){
 					if(xhr.responseText !== undefined){
 						$("#source-place-holder").html(xhr.responseText);
 						prettyPrint();
-						scrollToHolder();
 					}
 				}
 			};
@@ -1416,7 +1408,6 @@ JenSoft.Catalog = function(config){
 					if(xhr.responseText !== undefined){
 						$("#source-place-holder").html(xhr.responseText);
 						prettyPrint();
-						scrollToHolder();
 					}
 				}
 			};
@@ -1426,44 +1417,22 @@ JenSoft.Catalog = function(config){
 	}
 
 
-	function openX2DSource(viewClass,viewPackage){
-		contentBeforeAccessSource =  $('#content').html();
-		lookupView = viewPackage+'.'+viewClass;
-		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {	
-		 	$('#sourceTitle').html(viewClass);
-			var xhr = JenSoft.Http.getConnector();
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					if(xhr.responseText !== undefined){
-						
-						var x2dString = xhr.responseText;
-					
-						//x2dString = x2dString.replace('<','&lt;');
-						//x2dString = x2dString.replace('>','&gt;');
-						//alert("x2d ok: "+x2dString);
-						$("#source-place-holder").text(x2dString);
-						prettyPrint();
-						scrollToHolder();
-					}
-				}
-			};
-			xhr.open("GET", getCatalogAPIContext()+'/view/'+lookupView+'/x2d',true);
-		 	xhr.send();	
-		});
-	}
+	
 
 	function openViewSource(viewClass,viewPackage){
 		contentBeforeAccessSource =  $('#content').html();
 		lookupView = viewPackage+'.'+viewClass;
-		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {	
+		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {
+			
+			
+			
 		 	$('#sourceTitle').html(viewClass);
-			var xhr = JenSoft.Http.getConnector();
+			var xhr = getConnector();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					if(xhr.responseText !== undefined){
 						$("#source-place-holder").html(xhr.responseText);
 						prettyPrint();
-						scrollToHolder();
 					}
 				}
 			};
@@ -1473,7 +1442,7 @@ JenSoft.Catalog = function(config){
 	}
 
 	function embedApplet(type,viewClass,viewPackage){
-		$('#catalog-view-image').load('user-catalog-embeded-applet-template.html',function() {		
+		$('#catalog-view-image').load('catalog/user-catalog-embeded-applet-template.html',function() {		
 			
 			var archives = "jensoft-core-"+CatalogDef.core+".jar"+","+CatalogDef.artifact+"-"+CatalogDef.version+".jar"+","+CatalogDef.artifact+"-"+CatalogDef.version+"-sources.jar";
 			$("#uiapplet").attr('archive',archives);
@@ -1511,22 +1480,25 @@ JenSoft.Catalog = function(config){
 
 	function backFromSource(){
 		$('#content').html(contentBeforeAccessSource);
-		scrollToHolder();
+		$(".popover").remove();
 	}
 
 	function backFromUnit(){
 		$('#content').html(contentBeforeAccessUnit);
+		$(".popover").remove();
 	}
 
 	function backFromView(){	
 		 $('#content').html(contentBeforeAccessView);
 		 $('#inputAdminSearchCatalog').val(catalogSearchPattern);
 		 $('#inputAdminSearchCatalogUnit').val(catalogUnitSearchPattern);
+		 $(".popover").remove();
 	}
 
-	function backFromApplet(){	
+	function backFromApplet(){
+		$(".popover").remove();
 		$('#content').html(contentBeforeAccessApplet);
-		scrollToHolder();
+		$(".popover").remove();
 	}
 
 	
@@ -1598,12 +1570,8 @@ JenSoft.Catalog = function(config){
 			maxiMizeApplet :maxiMizeApplet,
 			
 			openViewSource : openViewSource,
-			openX2DSource : openX2DSource,
 			openReleaseNote : openReleaseNote,
 			openLicenseNote : openLicenseNote,
-			
-			maximizeCatalog: maximizeCatalog,
-			minimizeCatalog : minimizeCatalog,
 			
 			searchCatalog : searchCatalog,
 			searchCatalogUnit : searchCatalogUnit,
@@ -1622,5 +1590,5 @@ JenSoft.Catalog = function(config){
 	return publicCatalog;
 
 	
-};//end function JenSoft.Catalog
+};
 
