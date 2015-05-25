@@ -15,7 +15,21 @@ getConnector = function() {
 				return false;
 			}
 			return xhr;
-		};
+};
+
+		
+prettyPrint = function(){
+	$(document).ready(function() {
+		  $('pre code').each(function(i, block) {
+		    hljs.highlightBlock(block);
+		  });
+	});
+};
+
+scrollToHolder = function(){
+	
+};
+
 
 var JenSoft ={};
 JenSoft.CatalogServer ='';
@@ -183,64 +197,35 @@ JenSoft.Catalog = function(config){
 					installCatalogViews();
 				}
 			};
-			alert("get : "+getCatalogAPIContext()+'/def');
+			//alert("get : "+getCatalogAPIContext()+'/def');
 			xhr.open("GET", getCatalogAPIContext()+'/def', true);	
 			xhr.send();	
 		});
 	}
 	
-	/**
-	 * open catalog in the given div holder
-	 */
-	function openCatalog2(){	
-		alert('1');
-		$(".popover").remove();
-		initFrame();
-		//$('#'+catalogContainer).load(JenSoft.Context.path+'/module/catalog/user-catalog-template.html',function() {
-			//re - GET the real definition from server itself 
-			var xhr = getConnector();		
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					var catalogDef = xhr.responseXML;
-					CatalogDef.name = $(catalogDef).find('name').text();
-					CatalogDef.group = $(catalogDef).find('group').text();
-					CatalogDef.artifact = $(catalogDef).find('artifact').text();
-					CatalogDef.version = $(catalogDef).find('version').text();
-					CatalogDef.core = $(catalogDef).find('core').text();
-					CatalogDef.description = $(catalogDef).find('description').text();
-					CatalogDef.countCharts = $(catalogDef).find('count-charts').text();
-					CatalogDef.countUnits = $(catalogDef).find('count-units').text();
-					
-					displayTitle();
-					
-//					if(mode == 'views'){
-//						installCatalogViews();
-//					}else if(mode == 'units'){
-//						installCatalogUnits();
-//					}
-					installCatalogViews();
-				}
-			};
-			xhr.open("GET", getCatalogAPIContext()+'/def', true);	
-			xhr.send();
-			alert('2');
-		//});
-	}
-	
-	
 	function displayTitle(){
 		$("#catalogTitle").html('Catalog  '+CatalogDef.name);
-		$("#catalogSubTitle").html(CatalogDef.name);
-		$("#catalogWelcome").html('You are in the catalog of group <strong>'+CatalogDef.group+'</strong> with artifact <strong>'+CatalogDef.artifact+'</strong> of version <strong>'+CatalogDef.version+'</strong> and jensoft api core version '+CatalogDef.core);
-		checkNews();
+		$("#catalogSubTitle").html(CatalogDef.name+' browser');
+		$("#catalogWelcome").html(
+				'You are in the catalog of group <strong>'+
+				CatalogDef.group+'</strong> with artifact <strong>'+
+				CatalogDef.artifact+'</strong> of version <strong>'+
+				CatalogDef.version+'</strong> and jensoft api core version '+
+				CatalogDef.core+'.&nbsp;'+
+				'Catalog samples contains  <strong>'+CatalogDef.countCharts+' views</strong> and <strong>'+CatalogDef.countUnits+' Units</strong>.&nbsp;'+
+				'Read version <a href="#" onclick="getCatalogInstance(\'org.jensoft\',\'jensoft-samples\').openReleaseNote();" style="text-align: right;" >release note</a>&nbsp;'+
+				'and <a href="#" onclick="getCatalogInstance(\'org.jensoft\',\'jensoft-samples\').openLicenseNote();" style="text-align: right;" >license</a>'
+		);
+		
+		//checkNews();
 	}
 
 	function displayCatalogPopup(){
 		$(".popover").remove();
 		
 		var catImageURL = getCatalogAPIContext()+'/icon/48';
-		imageHtml = '<img src="'+catImageURL+'">';
-		$.get("/site/module/catalog/catalog-popup-template.html", function(popupContent) {
+		imageHtml = '<img class="img-responsive" src="'+catImageURL+'">';
+		$.get("catalog/catalog-popup-template.html", function(popupContent) {
 			
 			var m = getMeta(id);
 			
@@ -310,7 +295,7 @@ JenSoft.Catalog = function(config){
 		itemCatalogUnitPerPage = 4;
 		
 		
-		$('#'+catalogContainer).load('user-catalog-template.html',function() {		
+		$('#'+catalogContainer).load('catalog/user-catalog-template.html',function() {		
 			if(mode == 'views'){
 				installCatalogViews();
 			}else if(mode == 'units'){
@@ -336,31 +321,31 @@ JenSoft.Catalog = function(config){
 		itemCatalogUnitPerPage = 4;
 	}
 
-	/**
-	 * check news and add news item in news table holder
-	 */
-	function checkNews(){
-		var xhr = getConnector();		
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var news = $(xhr.responseXML).find('new');
-				if(news !== undefined && news !== null){
-					//alert("success check news : "+news.length);
-					var html='';
-					for (var n = 0; n < news.length; n++) {
-						html=html+'<tr>';
-						html=html+'<td><small>'+$(news[n]).text()+'</small></td>';
-						html=html+'</tr>';
-					}
-					$("#catalog-new-page-header").html('<tr><th></th></tr>');
-					$("#catalog-new-page-body").html(html);
-				}
-				
-			}
-		};
-		xhr.open("GET", getCatalogAPIContext()+'/news', true);	
-		xhr.send();	
-	}
+//	/**
+//	 * check news and add news item in news table holder
+//	 */
+//	function checkNews(){
+//		var xhr = getConnector();		
+//		xhr.onreadystatechange = function() {
+//			if (xhr.readyState == 4 && xhr.status == 200) {
+//				var news = $(xhr.responseXML).find('new');
+//				if(news !== undefined && news !== null){
+//					//alert("success check news : "+news.length);
+//					var html='';
+//					for (var n = 0; n < news.length; n++) {
+//						html=html+'<tr>';
+//						html=html+'<td><small>'+$(news[n]).text()+'</small></td>';
+//						html=html+'</tr>';
+//					}
+//					$("#catalog-new-page-header").html('<tr><th></th></tr>');
+//					$("#catalog-new-page-body").html(html);
+//				}
+//				
+//			}
+//		};
+//		xhr.open("GET", getCatalogAPIContext()+'/news', true);	
+//		xhr.send();	
+//	}
 
 
 	/**
@@ -509,16 +494,16 @@ JenSoft.Catalog = function(config){
 	/**
 	 * display label meta
 	 */
-	function displayLabelMeta(){
-		$("#catalog-name").html('<small><span class="boldblue1">'+CatalogDef.name+'</span></small>');
-		$("#catalog-description").html('<small><span class="boldblue1">'+CatalogDef.description+'</span></small>');
-		$("#catalog-group").html('<small><span class="boldblue1">'+CatalogDef.group+'</span></small>');
-		$("#catalog-artifact").html('<small><span class="boldblue1">'+CatalogDef.artifact+'</span></small>');
-		$("#catalog-version").html('<small><span class="boldblue1">'+CatalogDef.version+'</span></small>');
-		$("#catalog-core").html('<small><span class="boldblue1">'+CatalogDef.core+'</span></small>');
-		$("#catalog-views-size").html('<small><span class="boldblue1">'+CatalogDef.countCharts+'</span></small>');
-		$("#catalog-units-size").html('<small><span class="boldblue1">'+CatalogDef.countUnits+'</span></small>');
-	}
+//	function displayLabelMeta(){
+//		$("#catalog-name").html('<small><span class="boldblue1">'+CatalogDef.name+'</span></small>');
+//		$("#catalog-description").html('<small><span class="boldblue1">'+CatalogDef.description+'</span></small>');
+//		$("#catalog-group").html('<small><span class="boldblue1">'+CatalogDef.group+'</span></small>');
+//		$("#catalog-artifact").html('<small><span class="boldblue1">'+CatalogDef.artifact+'</span></small>');
+//		$("#catalog-version").html('<small><span class="boldblue1">'+CatalogDef.version+'</span></small>');
+//		$("#catalog-core").html('<small><span class="boldblue1">'+CatalogDef.core+'</span></small>');
+//		$("#catalog-views-size").html('<small><span class="boldblue1">'+CatalogDef.countCharts+'</span></small>');
+//		$("#catalog-units-size").html('<small><span class="boldblue1">'+CatalogDef.countUnits+'</span></small>');
+//	}
 
 	
 	/**
@@ -532,7 +517,7 @@ JenSoft.Catalog = function(config){
 				$("#inputAdminSearchCatalogUnit").val(catalogUnitSearchPattern);	
 			}
 			
-			displayLabelMeta();
+			//displayLabelMeta();
 			//displayLabelCatalogSize();		
 	}
 
@@ -575,17 +560,17 @@ JenSoft.Catalog = function(config){
 
 	function updateCatalogLookupMessageLabelHeader(){
 		if($("#inputAdminSearchCatalog").val() !== 'undefined' && $("#inputAdminSearchCatalog").val() != null && $("#inputAdminSearchCatalog").val() !== ''){
-			$("#catalog-search-messsage").html('<span class="boldblue1"><small>'+catalogSize+'&nbsp; view(s) lookup for \''+$("#inputAdminSearchCatalog").val()+'\'</small></span>');
+			$("#catalog-search-message").html('<span class="boldblue1"><small>'+catalogSize+'&nbsp; view(s) lookup for \''+$("#inputAdminSearchCatalog").val()+'\'</small></span>');
 		}else{
-			$("#catalog-search-messsage").html('<span class="boldblue1"><small>All Catalog</small></span>');
+			$("#catalog-search-message").html('<span class="boldblue1"><small>All Catalog</small></span>');
 		}
 	}
 
 	function updateCatalogUnitLookupMessageLabelHeader(){
 		if($("#inputAdminSearchCatalogUnit").val() !== 'undefined' && $("#inputAdminSearchCatalogUnit").val() != null && $("#inputAdminSearchCatalogUnit").val() !== ''){
-			$("#catalog-unit-search-messsage").html('<span class="boldblue1"><small>'+catalogUnitSize+'&nbsp; view(s) lookup for \''+$("#inputAdminSearchCatalogUnit").val()+'\'</small></span>');
+			$("#catalog-unit-search-message").html('<span class="boldblue1"><small>'+catalogUnitSize+'&nbsp; view(s) lookup for \''+$("#inputAdminSearchCatalogUnit").val()+'\'</small></span>');
 		}else{
-			$("#catalog-unit-search-messsage").html('<span class="boldblue1"><small>All Catalog</small></span>');
+			$("#catalog-unit-search-message").html('<span class="boldblue1"><small>All Catalog</small></span>');
 		}
 	}
 
@@ -696,14 +681,14 @@ JenSoft.Catalog = function(config){
 			 lastLabel="Next"; 
 		 }
 		
-		 html = '';
-		 html = html + '<ul>';
+		 html = '<nav>';
+		 html = html + '<ul class="pagination" style="margin : 0;">';
 		 html = html + '<li id="catalog-page'+pagesCatalogFrameStart+'"><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').selectCatalogPage('+pagesCatalogFrameStart+');return false;">'+firstLabel+'</a></li>';
 		 for(var i = pagesCatalogFrameStart+1; i < pagesCatalogFrameEnd; ++i){
 			 html = html + '<li id="catalog-page'+i+'"><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').selectCatalogPage('+i+');return false;">'+parseInt(i+1)+'</a></li>';
 		 }
 		 html = html + '<li id="catalog-page'+pagesCatalogFrameEnd+'"><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').selectCatalogPage('+pagesCatalogFrameEnd+');return false;">'+lastLabel+'</a></li>';
-		 html = html + '</ul>';
+		 html = html + '</ul></nav>';
 		 $("#catalog-pagination").html(html);
 	}
 
@@ -863,7 +848,7 @@ JenSoft.Catalog = function(config){
 		if($(v).find("type").text() == 'view'){
 			 lookupView = packageName.text()+'.'+className.text();
 			 imageURL = catalogAPI+'/view/'+encodeURIComponent(lookupView)+'/image';
-			 imageHtml = '<img src="'+imageURL+'">';
+			 imageHtml = '<img class="img-responsive" src="'+imageURL+'">';
 			 if(rank==0){
 				 $("#img1").html(imageHtml);
 			 }
@@ -897,16 +882,16 @@ JenSoft.Catalog = function(config){
 							html = '';
 							if(dashBoardviews.length == 2){
 								console.log("dashboard has 2 views");
-								var img1 = '<img width="160"  src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image/360/160'+'">';
-								var img2 = '<img width="160"  src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image/360/160'+'">';
+								var img1 = '<img class="img-responsive" width="160"  src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image/360/160'+'">';
+								var img2 = '<img class="img-responsive" width="160"  src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image/360/160'+'">';
 								html = '<table><tr><td>'+img1+'</td></tr><tr><td>'+img2+'</td></tr></table>';
 							}
 							if(dashBoardviews.length == 4){
 								console.log("dashboard has 4 views");
-								var img1 = '<img width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
-								var img2 = '<img width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
-								var img3 = '<img width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[2]).find('package').text()+'.'+$(dashBoardviews[2]).find('class').text())+'/image'+'">';
-								var img4 = '<img width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[3]).find('package').text()+'.'+$(dashBoardviews[3]).find('class').text())+'/image'+'">';
+								var img1 = '<img class="img-responsive" width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
+								var img2 = '<img class="img-responsive" width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
+								var img3 = '<img class="img-responsive" width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[2]).find('package').text()+'.'+$(dashBoardviews[2]).find('class').text())+'/image'+'">';
+								var img4 = '<img class="img-responsive" width="80" height="60" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[3]).find('package').text()+'.'+$(dashBoardviews[3]).find('class').text())+'/image'+'">';
 								html = '<table><tr><td>'+img1+'</td><td>'+img2+'</td></tr><tr><td>'+img3+'</td><td>'+img4+'</td></tr></table>';
 							}
 
@@ -955,7 +940,7 @@ JenSoft.Catalog = function(config){
 		if($(v).find("type").text() == "view"){
 			lookupView = viewPackage+'.'+viewClass;
 			imageURL = getCatalogAPIContext()+'/view/'+encodeURIComponent(lookupView)+'/image';
-			imageHtml = '<img src="'+imageURL+'">';
+			imageHtml = '<img class="img-responsive" src="'+imageURL+'">';
 			$("#tr_"+row).popover({ title: 'View '+viewClass, content: imageHtml, html:true });
 			$("#tr_"+row).popover('show');		
 		}else if($(v).find("type").text() == "dashboard"){
@@ -980,15 +965,15 @@ JenSoft.Catalog = function(config){
 						popoverId = row;
 						html = '';
 						if(dashBoardviews.length == 2){
-							var img1 = '<img width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
-							var img2 = '<img width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
+							var img1 = '<img class="img-responsive" width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
+							var img2 = '<img class="img-responsive" width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
 							html = '<table><tr><td>'+img1+'</td><td>'+img2+'</td></tr></table>';
 						}
 						if(dashBoardviews.length == 4){
-							var img1 = '<img width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
-							var img2 = '<img width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
-							var img3 = '<img width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[2]).find('package').text()+'.'+$(dashBoardviews[2]).find('class').text())+'/image'+'">';
-							var img4 = '<img width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[3]).find('package').text()+'.'+$(dashBoardviews[3]).find('class').text())+'/image'+'">';
+							var img1 = '<img class="img-responsive" width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
+							var img2 = '<img class="img-responsive" width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
+							var img3 = '<img class="img-responsive" width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[2]).find('package').text()+'.'+$(dashBoardviews[2]).find('class').text())+'/image'+'">';
+							var img4 = '<img class="img-responsive" width="180" height="140" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[3]).find('package').text()+'.'+$(dashBoardviews[3]).find('class').text())+'/image'+'">';
 							html = '<table><tr><td>'+img1+'</td><td>'+img2+'</td></tr><tr><td>'+img3+'</td><td>'+img4+'</td></tr></table>';
 						}
 						 $("#tr_"+row).popover({ title: 'Dashboard '+viewClass, content: html, html:true });
@@ -1102,17 +1087,17 @@ JenSoft.Catalog = function(config){
 
 	function buildCatalogUnit(unit){
 		 if(maximize){
-			 $('#'+catalogContainer).load('user-catalog-unit-maximized-template.html',function() {		
+			 $('#'+catalogContainer).load('catalog/user-catalog-unit-maximized-template.html',function() {		
 				 
 				 	$('#catalogUnitTitle').text("Unit : "+unit);
 					installAdminCatalogUnitViews(unit);
 				});
 		 }else{
-			 $('#'+catalogContainer).load('user-catalog-unit-template.html',function() {		
+			 $('#'+catalogContainer).load('catalog/user-catalog-unit-template.html',function() {		
 				
 				 	$('#catalogUnitTitle').text("Unit : "+unit);
 				 
-					displayLabelMeta();
+					//displayLabelMeta();
 					displayLabelMetaUnit();
 
 					installAdminCatalogUnitViews(unit);
@@ -1276,11 +1261,11 @@ JenSoft.Catalog = function(config){
 		
 		var v = getViewFromCache(viewClass,viewPackage);
 		//alert(toString(v));
-		$('#'+catalogContainer).load('user-catalog-view-template.html',function() {		
+		$('#'+catalogContainer).load('catalog/user-catalog-view-template.html',function() {		
 			
 			$(".popover").remove();
 			
-			displayLabelMeta();
+			//displayLabelMeta();
 			displayLabelMetaView(viewClass,viewPackage);
 			
 			
@@ -1309,7 +1294,7 @@ JenSoft.Catalog = function(config){
 				$("#catalog-view-resources").html(html2);
 				
 				imageURL = getCatalogAPIContext()+'/view/'+encodeURIComponent(lookupView)+'/image/900/600';
-				imageHtml = '<img width="600" height="400" src="'+imageURL+'">';
+				imageHtml = '<img class="img-responsive" width="600" height="400" src="'+imageURL+'">';
 				$("#catalog-view-image").html(imageHtml);
 				
 				var x2dExtention = $(v).find('x2d').text();
@@ -1352,16 +1337,16 @@ JenSoft.Catalog = function(config){
 								
 								if(dashBoardviews.length == 2){
 									console.log("dashboard has 2 views");
-									var img1 = '<img width="600" height="250" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image/600/250'+'">';
-									var img2 = '<img width="600" height="250" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image/600/250'+'">';
+									var img1 = '<img class="img-responsive" width="600" height="250" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image/600/250'+'">';
+									var img2 = '<img class="img-responsive" width="600" height="250" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image/600/250'+'">';
 									html = '<table><tr><td>'+img1+'</td></tr><tr><td>'+img2+'</td></tr></table>';
 								}
 								if(dashBoardviews.length == 4){
 									console.log("dashboard has 4 views");
-									var img1 = '<img width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
-									var img2 = '<img width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
-									var img3 = '<img width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[2]).find('package').text()+'.'+$(dashBoardviews[2]).find('class').text())+'/image'+'">';
-									var img4 = '<img width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[3]).find('package').text()+'.'+$(dashBoardviews[3]).find('class').text())+'/image'+'">';
+									var img1 = '<img class="img-responsive" width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[0]).find('package').text()+'.'+$(dashBoardviews[0]).find('class').text())+'/image'+'">';
+									var img2 = '<img class="img-responsive" width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[1]).find('package').text()+'.'+$(dashBoardviews[1]).find('class').text())+'/image'+'">';
+									var img3 = '<img class="img-responsive" width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[2]).find('package').text()+'.'+$(dashBoardviews[2]).find('class').text())+'/image'+'">';
+									var img4 = '<img class="img-responsive" width="350" height="240" src="'+catalogAPI+'/view/'+encodeURIComponent($(dashBoardviews[3]).find('package').text()+'.'+$(dashBoardviews[3]).find('class').text())+'/image'+'">';
 									html = '<table><tr><td>'+img1+'</td><td>'+img2+'</td></tr><tr><td>'+img3+'</td><td>'+img4+'</td></tr></table>';
 								}
 								
@@ -1404,9 +1389,9 @@ JenSoft.Catalog = function(config){
 
 	function openReleaseNote(){
 		contentBeforeAccessSource =  $('#content').html();
-		$('#'+catalogContainer).load('user-catalog-view-source-template.html',function() {	
+		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {	
 		 	$('#sourceTitle').html("Release note");
-			var xhr = JenSoft.Http.getConnector();
+			var xhr = getConnector();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					if(xhr.responseText !== undefined){
@@ -1423,9 +1408,9 @@ JenSoft.Catalog = function(config){
 
 	function openLicenseNote(){
 		contentBeforeAccessSource =  $('#content').html();
-		$('#'+catalogContainer).load('user-catalog-view-source-template.html',function() {	
+		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {	
 		 	$('#sourceTitle').html("License");
-			var xhr = JenSoft.Http.getConnector();
+			var xhr = getConnector();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					if(xhr.responseText !== undefined){
@@ -1444,7 +1429,7 @@ JenSoft.Catalog = function(config){
 	function openX2DSource(viewClass,viewPackage){
 		contentBeforeAccessSource =  $('#content').html();
 		lookupView = viewPackage+'.'+viewClass;
-		$('#'+catalogContainer).load('user-catalog-view-source-template.html',function() {	
+		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {	
 		 	$('#sourceTitle').html(viewClass);
 			var xhr = JenSoft.Http.getConnector();
 			xhr.onreadystatechange = function() {
@@ -1470,7 +1455,7 @@ JenSoft.Catalog = function(config){
 	function openViewSource(viewClass,viewPackage){
 		contentBeforeAccessSource =  $('#content').html();
 		lookupView = viewPackage+'.'+viewClass;
-		$('#'+catalogContainer).load('user-catalog-view-source-template.html',function() {	
+		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {	
 		 	$('#sourceTitle').html(viewClass);
 			var xhr = JenSoft.Http.getConnector();
 			xhr.onreadystatechange = function() {
@@ -1548,7 +1533,7 @@ JenSoft.Catalog = function(config){
 	
 	function maxiMizeApplet(type,viewClass,viewPackage){
 		contentBeforeAccessApplet = $('#content').html();
-		$('#content').load('user-catalog-view-applet-large.html',function() {		
+		$('#content').load('catalog/user-catalog-view-applet-large.html',function() {		
 			
 			var archives = "jensoft-core-"+CatalogDef.core+".jar"+","+CatalogDef.artifact+"-"+CatalogDef.version+".jar"+","+CatalogDef.artifact+"-"+CatalogDef.version+"-sources.jar";
 			$("#uiapplet").attr('archive',archives);
