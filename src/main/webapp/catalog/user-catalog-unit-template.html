@@ -1,95 +1,47 @@
-<div id="divadminunit">
 <div style="padding-top: 40px;" class="row" >
-	<h4 class="h4-catalog" id="catalogUnitTitle">Unit</h4>
-	<div class="span4">
+	<div class="col-md-12">
+	
+			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;<span class="boldmarron" id="catalogSubTitle"></span><br>
+			<small><span id="catalogWelcome"></span></small>
+			
+			
+ 			<div style="padding-top: 20px;" class="input-group">
+			  <span class="input-group-addon" id="basic-addon1">filter</span>
+			  <input id="inputAdminSearchCatalogUnit" type="text" class="form-control" placeholder="Type 'Pie' or 'area function curve'" aria-describedby="basic-addon1" onkeyup="getCatalogInstance('org.jensoft','jensoft-samples').searchCatalogUnit();">
+			</div>
 
-<button class="btn btn-primary"  onclick="getCatalogInstance('com.jensoft','jensoft-samples-catalog').backFromUnit();">Back to Units</button>
 
-						<table style="margin-top:20px" class="table table-hover table-condensed">
-					    
-					    	<tbody>
-					    		<tr>
-									<td><small>Name</small></td>
-									<td id="catalog-name"></td>
-								</tr>
-								<tr>
-									<td><small>Group</small></td>
-									<td id="catalog-group"></td>
-								</tr>
-								<tr>
-									<td><small>Artifact</small></td>
-									<td id="catalog-artifact"></td>
-								</tr>
-								<tr>
-									<td><small>Version</small></td>
-									<td id="catalog-version"></span></td>
-								</tr>
-								<tr>
-									<td><small>Core</small></td>
-									<td id="catalog-core"></span></td>
-								</tr>
-								<tr>
-									<td><small>Unit Name</small></td>
-									<td ><span id="catalog-unit-name" class="boldblue1"></span></td>
-								</tr>
-								<tr>
-									<td><small>Description</small></td>
-									<td><span id="catalog-unit-desc" class="boldblue1"></span></td>
-								</tr>
-								<tr>
-									<td><small>Views number</small></td>
-									<td><span id="catalog-unit-views" class="boldblue1"></span></td>
-								</tr>
-								<tr>
-									<td><small>Last search</small></td>
-									<td id="catalog-unit-search-messsage"><span class="boldblue1"><small>no search sequence yet!<small></span></td>
-								</tr>
-								<tr>
-									<td><small>Pages</small></td>
-									<td id="catalog-unit-current-page"></td>
-								</tr>
-							</tbody>				    
-					    </table>
-					    
-					   
+			<div class="row" style="padding-top: 20px;">
+				<div class="col-sm-3">Unit : <span id="catalog-unit-name" class="boldblue1"></span></div>
+				<div class="col-sm-3">Desc : <span id="catalog-unit-desc" class="boldblue1"></span></div>
+				<div class="col-sm-3">Views : <span id="catalog-unit-views" class="boldblue1"></span></div>
+<!-- 				<div class="col-sm-3"><span id="catalog-unit-search-messsage" class="boldblue1">All Unit</span></div> -->
+				<div class="col-sm-3"><span id="catalog-unit-current-page" class="boldblue1"></span></div>
+			</div>
+			
+			<div class="row" style="padding-top: 20px;">
+				<div class="col-sm-3" id="img1"></div>
+				<div class="col-sm-3" id="img2"></div>
+				<div class="col-sm-3" id="img3"></div>
+				<div class="col-sm-3" id="img4"></div>
+			</div>
+
+
+			
+						
+			<table class="table table-hover table-condensed">
+		    	<thead id="catalog-unit-page-header"></thead>				   
+		    	<tbody id="catalog-unit-page-body" ></tbody>				    
+		    </table>
+		    
+		    <div class="row" style="padding-top: 20px;">
+				<div class="col-sm-6" id="img1">
+					<div id="catalog-unit-pagination"></div>
+				</div>
+				<div class="col-sm-6" id="img2">
+				<button class="btn btn-primary btn-xs"  style="float : right;" onclick="getCatalogInstance('org.jensoft','jensoft-samples').backFromUnit();">Back to Units</button>
+				</div>
+			</div>
+			
 	</div>
-	<div class="span8">
-				
-				
-				
-											
-						<div class="form-search">
-    							<div   style="width: 100%;" class="input-prepend">
-									<span class="add-on">filter</span>
-   							 		<input  placeholder="Type 'Pie' or 'area function curve'"  style="width: 80%;" id="inputAdminSearchCatalogUnit" onkeyup="searchCatalogUnit();" type="text" class="span2 search-query">
-    							</div>
-    					</div>
-						
-						<br>
-
-						<div class="row">
-							<div class="span2" id="img1"></div>
-							<div class="span2" id="img2"></div>
-							<div class="span2" id="img3"></div>
-							<div class="span2" id="img4"></div>
-						</div>
-						
-						<br>
-							
-						<div class="row">
-	    					<div class="span8 ">
-	    						<button class="btn btn-primary  pull-right"  onclick="maximizeCatalog('unit');">Maximize</button>
-	    					</div>
-						</div>
-
-						<br>
-						
-						<table class="table table-hover table-condensed">
-					    	<thead id="catalog-unit-page-header"></thead>				   
-					    	<tbody id="catalog-unit-page-body" ></tbody>				    
-					    </table>
-						<div id="catalog-unit-pagination" class="pagination  pagination-small pagination-right"></div>
-		
-	</div>
-</div>	
-</div>	
+</div>

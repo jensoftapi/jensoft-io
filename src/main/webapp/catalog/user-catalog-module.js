@@ -241,69 +241,10 @@ JenSoft.Catalog = function(config){
 	}
 
 
-//	/**
-//	 * maximize catalog with given conf : all or unit
-//	 */
-//	function maximizeCatalog(conf){
-//		maximize = true;
-//		pageCatalog = 0;
-//		pagesCatalogFrameStart = 0;
-//		pagesCatalogFrameEnd = 7;
-//		itemCatalogPerPage = 6;
-//		
-//		pageCatalogUnit = 0;
-//		pagesCatalogUnitFrameStart = 0;
-//		pagesCatalogUnitFrameEnd = 7;
-//		itemCatalogUnitPerPage = 6;
-//		
-//		if(conf == 'all'){
-//			$('#'+catalogContainer).load('user-catalog-maximized-template.html',function() {		
-//				if(mode == 'views'){
-//					installCatalogViews();
-//				}else if(mode == 'units'){
-//					installCatalogUnits();
-//				}
-//				displayTitle();
-//			});
-//		}else if(conf == 'unit'){
-//			openCatalogUnit($(selectedUnit).find('name').text(),false);
-//			displayTitle();
-//		}
-//		
-//	}
-//
-//	/**
-//	 * minimize catalog
-//	 */
-//	function minimizeCatalog(){
-//		maximize = false;
-//		
-//		pageCatalog = 0;
-//		pagesCatalogFrameStart = 0;
-//		pagesCatalogFrameEnd = 7;
-//		itemCatalogPerPage = 4;
-//		
-//		pageCatalogUnit = 0;
-//		pagesCatalogUnitFrameStart = 0;
-//		pagesCatalogUnitFrameEnd = 7;
-//		itemCatalogUnitPerPage = 4;
-//		
-//		
-//		$('#'+catalogContainer).load('catalog/user-catalog-template.html',function() {		
-//			if(mode == 'views'){
-//				installCatalogViews();
-//			}else if(mode == 'units'){
-//				installCatalogUnits();
-//			}
-//			displayTitle();
-//		});
-//	}
-
 	/**
 	 * initialize frame
 	 */
 	function initFrame(){
-	//	maximize = false;
 		pageCatalog = 0;
 		pagesCatalogFrameStart = 0;
 		pagesCatalogFrameEnd = 7;
@@ -314,53 +255,6 @@ JenSoft.Catalog = function(config){
 		pagesCatalogUnitFrameEnd = 7;
 		itemCatalogUnitPerPage = 4;
 	}
-
-//	/**
-//	 * check news and add news item in news table holder
-//	 */
-//	function checkNews(){
-//		var xhr = getConnector();		
-//		xhr.onreadystatechange = function() {
-//			if (xhr.readyState == 4 && xhr.status == 200) {
-//				var news = $(xhr.responseXML).find('new');
-//				if(news !== undefined && news !== null){
-//					//alert("success check news : "+news.length);
-//					var html='';
-//					for (var n = 0; n < news.length; n++) {
-//						html=html+'<tr>';
-//						html=html+'<td><small>'+$(news[n]).text()+'</small></td>';
-//						html=html+'</tr>';
-//					}
-//					$("#catalog-new-page-header").html('<tr><th></th></tr>');
-//					$("#catalog-new-page-body").html(html);
-//				}
-//				
-//			}
-//		};
-//		xhr.open("GET", getCatalogAPIContext()+'/news', true);	
-//		xhr.send();	
-//	}
-
-
-//	/**
-//	 * install intro web start in place holder
-//	 */
-//	function installIntro(){
-//		var introClassURI = getCatalogAPIContext()+"/intro";
-//		var xhr = getConnector();		
-//		xhr.onreadystatechange = function() {
-//			if (xhr.readyState == 4 && xhr.status == 200) {
-//				var introItem = xhr.responseXML;
-//				//var introPackage = $(introItem).find('package').text();
-//				var introClass = $(introItem).find('class').text();
-//				var webStartHRef = getCatalogBase()+"/webstart/"+introClass+'.jnlp';
-//				$("#catalog-intro").attr('href',webStartHRef);
-//			}
-//		};
-//		xhr.open("GET", introClassURI, true);	
-//		xhr.send();	
-//	}
-
 
 
 	/**
@@ -480,39 +374,19 @@ JenSoft.Catalog = function(config){
 		xhr.send();
 		selectAdminCatalogUnitsPage(pageCatalog);
 		checkButtonSwitch();
-		
-		installIntro();
 	}
 
 
 	/**
-	 * display label meta
-	 */
-//	function displayLabelMeta(){
-//		$("#catalog-name").html('<small><span class="boldblue1">'+CatalogDef.name+'</span></small>');
-//		$("#catalog-description").html('<small><span class="boldblue1">'+CatalogDef.description+'</span></small>');
-//		$("#catalog-group").html('<small><span class="boldblue1">'+CatalogDef.group+'</span></small>');
-//		$("#catalog-artifact").html('<small><span class="boldblue1">'+CatalogDef.artifact+'</span></small>');
-//		$("#catalog-version").html('<small><span class="boldblue1">'+CatalogDef.version+'</span></small>');
-//		$("#catalog-core").html('<small><span class="boldblue1">'+CatalogDef.core+'</span></small>');
-//		$("#catalog-views-size").html('<small><span class="boldblue1">'+CatalogDef.countCharts+'</span></small>');
-//		$("#catalog-units-size").html('<small><span class="boldblue1">'+CatalogDef.countUnits+'</span></small>');
-//	}
-
-	
-	/**
 	 * initialize catalog context
 	 */
 	function initializeCatalogContext(){
-			if(catalogSearchPattern !== undefined){
-				$("#inputAdminSearchCatalog").val(catalogSearchPattern);	
-			}
-			if(catalogUnitSearchPattern !== undefined){
-				$("#inputAdminSearchCatalogUnit").val(catalogUnitSearchPattern);	
-			}
-			
-			//displayLabelMeta();
-			//displayLabelCatalogSize();		
+		if(catalogSearchPattern !== undefined){
+			$("#inputAdminSearchCatalog").val(catalogSearchPattern);	
+		}
+		if(catalogUnitSearchPattern !== undefined){
+			$("#inputAdminSearchCatalogUnit").val(catalogUnitSearchPattern);	
+		}
 	}
 
 
@@ -531,7 +405,6 @@ JenSoft.Catalog = function(config){
 		var viewsLookUpURI = getCatalogAPIContext()+'/views/size/search/'+encodeURIComponent($("#inputAdminSearchCatalog").val());
 		xhr.open("GET",viewsLookUpURI , true);
 		xhr.send();
-		
 	}
 
 	function updateCatalogPageLabelHeader(){
@@ -543,11 +416,10 @@ JenSoft.Catalog = function(config){
 	}
 
 	function updateCatalogUnitPageLabelHeader(){
-		
 		if(pageCatalogUnitCount > 0){
-			$("#catalog-unit-current-page").html('<small> <span class="boldorange"> Page '+parseInt(pageCatalogUnit+1)+' on '+(pageCatalogUnitCount)+' pages</span></small>');
+			$("#catalog-unit-current-page").html('Page '+parseInt(pageCatalogUnit+1)+' on '+(pageCatalogUnitCount)+' pages');
 		}else{
-			$("#catalog-unit-current-page").html('<small> <span class="boldorange">No Pages</span></small>');
+			$("#catalog-unit-current-page").html('No Pages');
 		}
 	}
 
@@ -629,7 +501,6 @@ JenSoft.Catalog = function(config){
 	}
 
 	function countCatalogUnitPage(){
-		//alert("count cat unit page");
 		intPart = parseInt(catalogUnitSize/itemCatalogUnitPerPage);
 		if((catalogUnitSize - intPart*itemCatalogUnitPerPage) > 0){
 			pageCatalogUnitCount = intPart +1 ;
@@ -651,16 +522,14 @@ JenSoft.Catalog = function(config){
 
 	function buildCatalogHTMLPager(){
 		$("#catalog-pagination").html('');
-		
 		if(pageCatalogCount == 0){
 			 return;
 		}
-		
 		if(pageCatalogCount == 1){
-			 html = '';
-			 html = html + '<ul>';
+			 html = '<nav>';
+			 html = html + '<ul class="pagination" style="margin : 0;">';
 			 html = html + '<li id="catalog-page0" ><a href="#">'+'1'+'</a></li>';
-			 html = html + '</ul>';
+			 html = html + '</ul></nav>';
 			 $("#catalog-pagination").html(html);
 			 return;
 		}
@@ -687,12 +556,11 @@ JenSoft.Catalog = function(config){
 
 	function buildCatalogUnitHTMLPager(unit){
 		$("#catalog-unit-pagination").html('');
-		
 		if(pageCatalogUnitCount == 1){
-			 html = '';
-			 html = html + '<ul>';
+			 html = '<nav>';
+			 html = html + '<ul class="pagination" style="margin : 0;">';
 			 html = html + '<li id="catalog-unit-page0" ><a href="#">'+'1'+'</a></li>';
-			 html = html + '</ul>';
+			 html = html + '</ul></nav>';
 			 $("#catalog-unit-pagination").html(html);
 			 return;
 		}
@@ -705,14 +573,14 @@ JenSoft.Catalog = function(config){
 			 lastLabel="Next"; 
 		 }
 		
-		 html = '';
-		 html = html + '<ul>';
+		 html = '<nav>';
+		 html = html + '<ul class="pagination" style="margin : 0;">';
 		 html = html + '<li id="catalog-unit-page'+pagesCatalogUnitFrameStart+'"><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').selectPageUnitViews(\''+unit+'\','+pagesCatalogUnitFrameStart+');return false;">'+firstLabel+'</a></li>';
 		 for(var i = pagesCatalogUnitFrameStart+1; i < pagesCatalogUnitFrameEnd; ++i){
 			 html = html + '<li id="catalog-unit-page'+i+'"><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').selectPageUnitViews(\''+unit+'\','+i+');return false;">'+parseInt(i+1)+'</a></li>';
 		 }
 		 html = html + '<li id="catalog-unit-page'+pagesCatalogUnitFrameEnd+'"><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').selectPageUnitViews(\''+unit+'\','+pagesCatalogUnitFrameEnd+');return false;">'+lastLabel+'</a></li>';
-		 html = html + '</ul>';
+		 html = html + '</ul></nav>';
 		 $("#catalog-unit-pagination").html(html);
 	}
 
@@ -763,47 +631,42 @@ JenSoft.Catalog = function(config){
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				if(xhr.responseXML !== undefined){
-						
 					views = $(xhr.responseXML).find('view');
-					
-						var html ='';
-						if(views.length > 0){
-							var indexCount =  pageIndex*itemCatalogPerPage;
+					var html ='';
+					if(views.length > 0){
+						var indexCount =  pageIndex*itemCatalogPerPage;
 
-							for(var i = 0; i < views.length; ++i){
-								 
-								 var view = views[i];
-								 var className =$(view).find('class');
-								 var packageName =$(view).find('package');
-								 var unitName =$(view).find('unit');
-								 var description =$(view).find('description');
-								 var type =$(view).find('type');
-								 
-								 
-								 mountImageInGalleryHeader(i,packageName,className);
-								
-								
-								 html = html+'<tr>';
-								 html = html + '<td><small>'+indexCount+'</small></td>';
-								 html = html + '<td><small><a href="#" rel="popover" data-trigger="hover" onmouseover="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').displayImage('+i+',\''+className.text()+'\',\''+packageName.text()+'\');return false;" id="tr_'+i+'" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').openCatalogView(\''+className.text()+'\',\''+packageName.text()+'\',\'all\');return false;">'+className.text()+'</a></small><br><span class="verysmall">'+packageName.text()+'</span></td>';
-								 html = html + '<td><small><span class="verysmall2 colorblue1">'+description.text()+'</span></small></td>';
-								 html = html + '<td><small><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').openCatalogUnit(\''+unitName.text()+'\');return false;">'+unitName.text()+'<a></small></td>';
-								 html = html + '</tr>';
-								 indexCount = indexCount+1;
+						for(var i = 0; i < views.length; ++i){
+							 var view = views[i];
+							 var className =$(view).find('class');
+							 var packageName =$(view).find('package');
+							 var unitName =$(view).find('unit');
+							 var description =$(view).find('description');
+							 var type =$(view).find('type');
+							 
+							 mountImageInGalleryHeader(i,packageName,className);
+							
+							 html = html+'<tr>';
+							 html = html + '<td><small>'+indexCount+'</small></td>';
+							 html = html + '<td><small><a href="#" rel="popover" data-trigger="hover" onmouseover="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').displayImage('+i+',\''+className.text()+'\',\''+packageName.text()+'\');return false;" id="tr_'+i+'" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').openCatalogView(\''+className.text()+'\',\''+packageName.text()+'\',\'all\');return false;">'+className.text()+'</a></small><br><span class="verysmall">'+packageName.text()+'</span></td>';
+							 html = html + '<td><small><span class="verysmall2 colorblue1">'+description.text()+'</span></small></td>';
+							 html = html + '<td><small><a href="#" onclick="getCatalogInstance(\''+catalogGroup+'\',\''+catalogArtifact+'\').openCatalogUnit(\''+unitName.text()+'\');return false;">'+unitName.text()+'<a></small></td>';
+							 html = html + '</tr>';
+							 indexCount = indexCount+1;
+						 }
+						 if(views.length < itemCatalogPerPage){
+							 for(var i = views.length; i < itemCatalogPerPage; ++i){
+								 html = html+'<tr><td>--</td><td>--<br>--</td><td>--</td><td>--</td></tr>';
+								 clearImage(i+1);
 							 }
-							 if(views.length < itemCatalogPerPage){
-								 for(var i = views.length; i < itemCatalogPerPage; ++i){
-									 html = html+'<tr><td>--</td><td>--<br>--</td><td>--</td><td>--</td></tr>';
-									 clearImage(i+1);
-								 }
-							 }
-						}else{
-							html = html+'<tr><td><small><span class="boldorange">Result(0)</span></small></td><td><small>search word matches any view name or package</small></td><td></td><td></td></tr>';
-						}
-						$("#catalog-page-header").html('<tr><th></th><th></th><th></th><th></th><tr><tr><th><small><small></th><th><small><span class="boldblue1">Chart</span><small></th><th><small><span class="boldblue1">Description</span><small></th><th><small><span class="boldblue1">Unit</span><small></th></tr>');
-						$("#catalog-page-body").html(html);
-						updateCatalogPageLabelHeader();
-						highligthSearch();
+						 }
+					}else{
+						html = html+'<tr><td><small><span class="boldorange">Result(0)</span></small></td><td><small>search word matches any view name or package</small></td><td></td><td></td></tr>';
+					}
+					$("#catalog-page-header").html('<tr><th></th><th></th><th></th><th></th><tr><tr><th><small><small></th><th><small><span class="boldblue1">Chart</span><small></th><th><small><span class="boldblue1">Description</span><small></th><th><small><span class="boldblue1">Unit</span><small></th></tr>');
+					$("#catalog-page-body").html(html);
+					updateCatalogPageLabelHeader();
+					highligthSearch();
 				}
 			}
 		};
@@ -834,10 +697,10 @@ JenSoft.Catalog = function(config){
 	 */
 	function mountImageInGalleryHeader(rank,packageName,className){
 		v = getViewFromCache(className.text(), packageName.text());
-		console.log("mountImageInGalleryHeader for view class cache: "+packageName.text()+"."+className.text());
-		console.log("mountImageInGalleryHeader for type : "+$(v).find("type").text());
+		//console.log("mountImageInGalleryHeader for view class cache: "+packageName.text()+"."+className.text());
+		//console.log("mountImageInGalleryHeader for type : "+$(v).find("type").text());
 		var catalogAPI = getCatalogAPIContext();
-		console.log("catalogAPI : "+catalogAPI);
+		//console.log("catalogAPI : "+catalogAPI);
 		if($(v).find("type").text() == 'view'){
 			 lookupView = packageName.text()+'.'+className.text();
 			 imageURL = catalogAPI+'/view/'+encodeURIComponent(lookupView)+'/image';
@@ -1078,23 +941,18 @@ JenSoft.Catalog = function(config){
 	}
 
 	function buildCatalogUnit(unit){
-//		 if(maximize){
-//			 $('#'+catalogContainer).load('catalog/user-catalog-unit-maximized-template.html',function() {		
-//				 
-//				 	$('#catalogUnitTitle').text("Unit : "+unit);
-//					installAdminCatalogUnitViews(unit);
-//				});
-//		 }else{
-			 $('#'+catalogContainer).load('catalog/user-catalog-unit-template.html',function() {		
+
+		$('#'+catalogContainer).load('catalog/user-catalog-unit-template.html',function() {		
 				
 				 	$('#catalogUnitTitle').text("Unit : "+unit);
 				 
+				 	displayTitle();
+				 	
 					//displayLabelMeta();
 					displayLabelMetaUnit();
 
 					installAdminCatalogUnitViews(unit);
-				});
-		// }
+		});
 	}
 
 	function openCatalogUnit(unit,loadContent){
@@ -1102,7 +960,6 @@ JenSoft.Catalog = function(config){
 		//bug
 		if(loadContent !== false)
 		contentBeforeAccessUnit  =  $('#content').html();
-		//unitsContent =  $('#content').html();
 		 
 		pageCatalogUnit = 0;
 		pagesCatalogUnitFrameStart = 0;
@@ -1183,7 +1040,7 @@ JenSoft.Catalog = function(config){
 		styleCatalogUnitActivePage();
 
 		fetchUnitViews(unit,pageIndex);
-		
+		return false;
 	}
 
 	function fetchUnitViews(unit,pageIndex){
@@ -1423,10 +1280,6 @@ JenSoft.Catalog = function(config){
 		contentBeforeAccessSource =  $('#content').html();
 		lookupView = viewPackage+'.'+viewClass;
 		$('#'+catalogContainer).load('catalog/user-catalog-view-source-template.html',function() {
-			
-			
-			
-		 	$('#sourceTitle').html(viewClass);
 			var xhr = getConnector();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
@@ -1523,19 +1376,19 @@ JenSoft.Catalog = function(config){
 			$("#uiapplet").attr('codebase',getCatalogBase()+"/resources");
 			$("#uiapplet").attr('code',appletCode);
 			
-			$("#uiapplet").attr('width',"100%");
+			$("#uiapplet").attr('width',"80%");
 			$("#uiapplet").attr('height',"500px");
 			
 			$('#catalog-view-image').unbind('mousewheel');
 			$('#'+catalogContainer).unbind('mousewheel');
 			
 			var h = $(window).height() - 60;    	
-		    $('#uiapplet').attr( 'width', $(window).width());
+		    $('#uiapplet').attr( 'width', $(window).width()-100);
 		    $('#uiapplet').attr( 'height', h );
 		    
 		    $(window).resize(function() {
 		    	var hr = $(window).height() - 60;    	
-		        $('#uiapplet').attr( 'width', $(window).width() );
+		        $('#uiapplet').attr( 'width', $(window).width()-100);
 		        $('#uiapplet').attr( 'height', hr );
 		    });
 		    
