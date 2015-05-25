@@ -8,6 +8,10 @@ html {
   min-height: 100%;
 }
 
+a {
+	color : rgb(22, 125, 218);
+}
+
 .footer {
   position: absolute;
   padding-top: 100px;

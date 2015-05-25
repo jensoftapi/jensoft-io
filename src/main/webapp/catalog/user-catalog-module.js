@@ -1144,8 +1144,9 @@ JenSoft.Catalog = function(config){
 				}
 				$("#catalog-view-resources").html(html2);
 				
-				imageURL = getCatalogAPIContext()+'/view/'+encodeURIComponent(lookupView)+'/image/900/600';
-				imageHtml = '<img class="img-responsive" width="600" height="400" src="'+imageURL+'">';
+				imageURL = getCatalogAPIContext()+'/view/'+encodeURIComponent(lookupView)+'/image/600/400';
+				//imageHtml = '<img class="img-responsive" width="600" height="400" src="'+imageURL+'">';
+				imageHtml = '<img class="img-responsive"  src="'+imageURL+'">';
 				$("#catalog-view-image").html(imageHtml);
 				
 //				var x2dExtention = $(v).find('x2d').text();
