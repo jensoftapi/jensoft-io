@@ -60,3 +60,90 @@ pre {
 	padding: 0;
 	background: white;
 }
+
+.colorblue1 {
+	color:#126499;
+}
+.colorblue2 {
+	color:#314e64;
+}
+
+.colorblue3 {
+	color:rgb(0, 136, 204);
+}
+
+
+.colormarron {
+	color:rgb(139, 69, 19);
+}
+
+
+.boldmarron {
+	color:rgb(139, 69, 19);
+	font-weight:bold;	
+}
+
+.boldgreen {
+	color:rgb(156, 186, 49);
+	font-weight:bold;	
+}
+
+
+.boldblue3 {
+	color:rgb(0, 136, 204);
+	font-weight:bold;	
+}
+
+.boldblue1 {
+	color:#126499;
+	font-weight:bold;	
+}
+.bold2blue1 {
+	color:#126499;
+	font-size:0.9em;
+}
+
+.boldblue2 {
+	color:#314e64;
+	font-weight:bold;	
+}
+
+.colororange {
+	color:#d44d1c;
+}
+
+.boldorange {
+	color:#d44d1c;
+	font-weight:bold;	
+}
+
+.verysmall {
+    font-size: 0.64em;
+}
+
+.verysmall2 {
+    font-size: 0.72em;
+}
+
+.highlight { background-color: yellow }
+
+
+pre { 
+    display : block;
+    padding-left : 20px;
+    padding-bottom : 10px;
+    padding-top:0;
+    border-radius : 0;
+   	background: none;
+    background-color: none;
+    border-bottom : none;
+    border-top : none;
+    border-right : none;
+    border-left-color: rgb(200,200,200);
+    border-left-width: 3px;
+}
+
+.hljs{
+	padding: 0;
+	background: white;
+}
