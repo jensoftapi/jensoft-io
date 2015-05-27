@@ -32,13 +32,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 
-import org.jensoft.core.catalog.nature.Captcha;
 import org.jensoft.core.catalog.nature.Catalog;
 import org.jensoft.core.catalog.nature.JenSoftDashboard;
 import org.jensoft.core.catalog.nature.JenSoftView;
-import org.jensoft.core.catalog.nature.New;
 import org.jensoft.core.catalog.nature.UIUnit;
-import org.jensoft.core.catalog.nature.X2DView;
 import org.jensoft.core.plugin.AbstractPlugin;
 import org.jensoft.core.plugin.copyright.CopyrightPlugin;
 import org.jensoft.core.projection.Projection;
@@ -553,36 +550,6 @@ public class CatalogServer {
 	}
 	
 	
-	/**
-	 * GET view source
-	 * @param viewClass
-	 * @return
-	 */
-	@GET
-	@Path("/news")
-	public Response news(@PathParam("view") String viewClass){
-		ArrayList<NewItem> news = new ArrayList<NewItem>();
-		for(Class<?> c : CatalogRepository.getNewCache().values()){
-			New newFromClass = c.getAnnotation(New.class);
-			New newFromClassPackage = c.getPackage().getAnnotation(New.class);
-			
-			if(newFromClass != null){
-				NewItem i = new NewItem();
-				i.setComment(newFromClass.comment());
-				news.add(i);
-			}
-//			if(newFromClassPackage != null){
-//				NewItem i = new NewItem();
-//				i.setComment(newFromClassPackage.comment());
-//				news.add(i);
-//			}
-		}
-		
-		NewBook book = new NewBook();
-		book.setPage(news);
-		return Response.ok().entity(book).build();
-		
-	}
 	
 	/**
 	 * GET view source
@@ -736,26 +703,6 @@ public class CatalogServer {
 		return getUnitViewsPage(unit,page, viewsPerPage, searchSequence);		
 	}
 	
-	/**
-	 * GET unit views
-	 * @param unit
-	 * @return
-	 */
-	@GET
-	@Path("intro")
-	public Response intro(){
-		logger.info("fetch intro ");
-		Class<?> intro = CatalogRepository.getIntro();
-		if(intro != null){
-		ViewItem introItem = new ViewItem();
-		introItem.setClassName(intro.getSimpleName());
-		introItem.setClassPackage(intro.getPackage().getName());
-		return Response.ok(introItem).build();
-		}else{
-			return Response.status(404).build();
-		}
-	}
-	
 	
 	/**
 	 * GET unit views
@@ -888,7 +835,6 @@ public class CatalogServer {
 					item.setClassPackage(c.getPackage().getName());
 					JenSoftView viewAnnot = c.getAnnotation(JenSoftView.class);
 					JenSoftDashboard dashboardAnnot = c.getAnnotation(JenSoftDashboard.class);
-					X2DView x2dAnnot = c.getAnnotation(X2DView.class);
 					
 					UIUnit uiunit = CatalogRepository.getViewUnitMapCache().get(c);
 					if(uiunit != null){
@@ -907,34 +853,6 @@ public class CatalogServer {
 						item.setDescription(dashboardAnnot.description());
 						item.setType("dashboard");
 					}
-					if(x2dAnnot != null){
-						item.setX2d("true");
-					}else{
-						item.setX2d("false");
-					}
-					
-					//captchas
-					if(viewAnnot != null && viewAnnot.captchas() != null){
-						
-						Captcha[] captchasResource = viewAnnot.captchas();
-						logger.info("has captchas : "+c.getSimpleName() +" count : "+captchasResource.length);
-						if(captchasResource != null && captchasResource.length > 0){
-							ArrayList<CaptchaItem> captchaItems = new ArrayList<CaptchaItem>();
-							item.setCaptchas(captchaItems);
-							
-							for (int i = 0; i < captchasResource.length; i++) {
-								Captcha see = captchasResource[i];
-								CaptchaItem captchaItem = new CaptchaItem();
-								captchaItem.setQuestion(see.question());
-								captchaItem.setAnwser(see.anwser());
-								captchaItems.add(captchaItem);
-							}
-						}
-					}else{
-						logger.info("has NO captchas : "+c.getSimpleName());
-					}
-					
-					
 					//see resource
 					if(viewAnnot != null && viewAnnot.see() != null){
 						Class<?>[] seeResource = viewAnnot.see();
@@ -966,8 +884,6 @@ public class CatalogServer {
 							}
 						}
 					}
-					
-					
 					catalogPart.add(item);
 				}
 				count++;
@@ -975,7 +891,6 @@ public class CatalogServer {
 			ViewsPage catalogPage = new ViewsPage();
 			catalogPage.setPage(catalogPart);
 			return Response.status(200).entity(catalogPage).build();
-			
 		}		
 		return Response.status(200).build();
 	}

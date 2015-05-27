@@ -40,8 +40,6 @@ public class CatalogRepository implements ServletContextListener {
 	static Logger logger = Logger.getLogger(CatalogRepository.class);
 
 	private static PackagesCatalogConfig resourceConfig;
-
-	
 	
 	private static String webStartTemplate;
 	private static File webStartDir;	
@@ -306,25 +304,8 @@ public class CatalogRepository implements ServletContextListener {
 		generateWebStart(ctx);
 
 		createCache();
-		createCaptchaCache();
-
 	}
 
-	
-
-	
-	public static ConcurrentHashMap<Integer, Class<?>> getCaptchaCache() {
-		return captchaCache;
-	}
-	
-	
-	
-	/**
-	 * @return the x2dCache
-	 */
-	public static ConcurrentHashMap<Integer, Class<?>> getX2dCache() {
-		return x2dCache;
-	}
 
 	public static ConcurrentHashMap<Integer, Class<?>> getViewsCache() {
 		return viewsCache;
@@ -342,10 +323,6 @@ public class CatalogRepository implements ServletContextListener {
 		return unitsCache;
 	}
 	
-	public static ConcurrentHashMap<Integer, Class<?>> getNewCache() {
-		return newCache;
-	}
-
 	public static ConcurrentHashMap<UIUnit, ConcurrentHashMap<Integer, Class<?>>> getUnitViewsMapCache() {
 		return viewsByUnit;
 	}
@@ -358,7 +335,6 @@ public class CatalogRepository implements ServletContextListener {
 		return defaultUnit;
 	}
 	
-	public static Class intro;
 	
 	public static Class catalog;
 
@@ -379,21 +355,6 @@ public class CatalogRepository implements ServletContextListener {
 //			}
 //		}
 		
-		// x2d
-		logger.info("create x2d cache");
-		Set<Class<?>> x2dClasses = resourceConfig.getX2DClasses();
-		int countX2D = 0;
-		for (Class<?> cc : x2dClasses) {
-			x2dCache.put(new Integer(countX2D++), cc);
-		}
-		
-		// captcha
-		logger.info("create captcha cache");
-		Set<Class<?>> catchaClasses = resourceConfig.getCaptchaClasses();
-		int countCaptcha = 0;
-		for (Class<?> cc : catchaClasses) {
-			captchaCache.put(new Integer(countCaptcha++), cc);
-		}
 
 		// views
 		logger.info("create View cache");
@@ -419,13 +380,6 @@ public class CatalogRepository implements ServletContextListener {
 			unitsCache.put(new Integer(countUnit++), uc);
 		}
 		
-		// new
-		logger.info("create View cache");
-		Set<Class<?>> newClasses = resourceConfig.getNewClasses();
-		int countNew = 0;
-		for (Class<?> nc : newClasses) {
-			newCache.put(new Integer(countNew++), nc);
-		}
 
 		logger.info("create Default Unit instance");
 		defaultUnit = new UIUnit() {
@@ -532,15 +486,11 @@ public class CatalogRepository implements ServletContextListener {
 			}
 		}
 		
-		intro = resourceConfig.getIntro();
 		catalog = resourceConfig.getCatalog();
 
 	}
 	
-	public static Class<?> getIntro(){
-		return intro;
-	}
-	
+
 	
 	public static Class<?> getCatalog(){
 		return catalog;
@@ -591,132 +541,8 @@ public class CatalogRepository implements ServletContextListener {
 	}
 	
 	
-	private void createCaptchaCacheOLD() {
-		Set<Class<?>> captchas =  resourceConfig.getCaptchaClasses();
-		int count = 0;
-		for (Class<?> clazz : captchas) {
-			try {
-				Captcha captchaAnnotation = clazz.getAnnotation(Captcha.class);
-				logger.info("captcha class : "+clazz.getName());
-				logger.info("captcha question : "+captchaAnnotation.question());
-				logger.info("captcha anwser : "+captchaAnnotation.anwser());
-				
-				View v = (View)clazz.newInstance();
-				
-				for(Projection w : v.getProjections()){
-					List<AbstractPlugin> plugins = w.getPluginRegistry();
-					List<AbstractPlugin> toremove = new ArrayList<AbstractPlugin>();
-					for (AbstractPlugin p : plugins) {
-						if(p.getClass().getName().equals(CopyrightPlugin.class.getName())){
-							toremove.add(p);
-						}
-					}
-					plugins.removeAll(toremove);
-				}
-//				RoundViewFill b = new RoundViewFill();
-//				b.setOutlineColor(Color.BLACK);
-//				b.setOutlineRound(0);
-//				v.setBackgroundPainter(b);
-				//BufferedImage image =  v.createViewEmitter().emitAsBufferedImage(captchaAnnotation.dimension().width(), captchaAnnotation.dimension().height());
-				BufferedImage image =  v.createViewEmitter().emitAsBufferedImage(300, 200);
-				captchItemsImage.put(count, image);
-				
-				CaptchaItem item = new CaptchaItem();
-				
-				item.setQuestion(captchaAnnotation.question());
-				item.setAnwser(captchaAnnotation.anwser());
-				ResourceBundle res = ResourceBundle.getBundle("catalog");
-				item.setUrl(res.getString("catalog.server") + "/catalog/com/jensoft/jensoft-captcha-catalog/1.0.0/api/captcha/image/"+Integer.toString(count));
-				
-				captchaItems.put(count, item);
-				
-				count++;
-			} catch (Exception e) {
-				logger.error("captcha error",e);
-			} 
-		}
-		
-		captchaItemsSize = captchaItems.size();
-		logger.info("captcha count : " + captchas.size());
-	}
-	
-	private void createCaptchaCache() {
-		Set<Class<?>> captchas =  resourceConfig.getView2DClasses();
-		int count = 0;
-		for (Class<?> clazz : captchas) {
-			try {
-				JenSoftView viewAnnotation = clazz.getAnnotation(JenSoftView.class);
-				Captcha[] captchasAnnotations = viewAnnotation.captchas();
-				if(captchasAnnotations != null && captchasAnnotations.length>0){
-					logger.info("captcha class : "+clazz.getName());
-					for (Captcha captcha : captchasAnnotations) {
-						
-						
-						//
-						logger.info("captcha class : "+clazz.getName());
-						logger.info("captcha question : "+captcha.question());
-						logger.info("captcha anwser : "+captcha.anwser());
-						
-						View v = (View)clazz.newInstance();
-						
-						for(Projection w : v.getProjections()){
-							List<AbstractPlugin> plugins = w.getPluginRegistry();
-							List<AbstractPlugin> toremove = new ArrayList<AbstractPlugin>();
-							for (AbstractPlugin p : plugins) {
-								if(p.getClass().getName().equals(CopyrightPlugin.class.getName())){
-									toremove.add(p);
-								}
-							}
-							plugins.removeAll(toremove);
-						}
-//						RoundViewFill b = new RoundViewFill();
-//						b.setOutlineColor(Color.BLACK);
-//						b.setOutlineRound(0);
-//						v.setBackgroundPainter(b);
-						//BufferedImage image =  v.createViewEmitter().emitAsBufferedImage(captchaAnnotation.dimension().width(), captchaAnnotation.dimension().height());
-						BufferedImage image =  v.createViewEmitter().emitAsBufferedImage(300, 200);
-						captchItemsImage.put(count, image);
-						
-						CaptchaItem item = new CaptchaItem();
-						
-						item.setQuestion(captcha.question());
-						item.setAnwser(captcha.anwser());
-						ResourceBundle res = ResourceBundle.getBundle("catalog");
-						item.setUrl(res.getString("catalog.server") + "/catalog/com/jensoft/jensoft-captcha-catalog/1.0.0/api/captcha/image/"+Integer.toString(count));
-						
-						captchaItems.put(count, item);
-						
-						count++;
-						//
-						
-						
-					}
-				}
-				
-			} catch (Exception e) {
-				logger.error("captcha error",e);
-			} 
-		}
-		
-		captchaItemsSize = captchaItems.size();
-		logger.info("captcha count : " + captchas.size());
-	}
 	
 	
-	public static CaptchaItem getCaptcha(){
-		Random r = new Random();
-		int index = r.nextInt(captchaItemsSize);
-		return captchaItems.get(index);
-	}
-	
-	
-	public static int getCaptchaCount(){
-		return captchaItems.size();
-	}
-	
-	public static BufferedImage getCaptchaImage(int captchaId){	
-		return captchItemsImage.get(captchaId);
-	}
 
 	private void initCatalog() {
 		

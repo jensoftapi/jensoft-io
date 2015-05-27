@@ -16,26 +16,12 @@ public class ViewItem {
 	private String unit;
 	private String description;
 	private String type;
-	private String x2d;
 
 	private ArrayList<SeeItem> sees;
-	private ArrayList<CaptchaItem> captchas;
 
 	public ViewItem() {
 	}
 
-	@XmlElement(name = "x2d")
-	public String getX2d() {
-		return x2d;
-	}
-
-	/**
-	 * @param x2d
-	 *            the x2d to set
-	 */
-	public void setX2d(String x2d) {
-		this.x2d = x2d;
-	}
 
 	@XmlElement(name = "class")
 	public String getClassName() {
@@ -98,18 +84,5 @@ public class ViewItem {
 		this.sees = sees;
 	}
 
-	@XmlElement(name = "captcha", type = CaptchaItem.class)
-	public ArrayList<CaptchaItem> getCaptchas() {
-		return captchas;
-	}
-
-	/**
-	 * @param captchas the captchas to set
-	 */
-	public void setCaptchas(ArrayList<CaptchaItem> captchas) {
-		this.captchas = captchas;
-	}
-	
-	
 
 }
