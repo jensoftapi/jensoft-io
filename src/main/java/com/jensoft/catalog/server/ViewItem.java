@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "view")
 @XmlType(propOrder = { "className", "classPackage", "description", "type",
-		"unit", "sees", "x2d" ,"captchas"})
+		"unit", "sees"})
 public class ViewItem {
 
 	private String className;
