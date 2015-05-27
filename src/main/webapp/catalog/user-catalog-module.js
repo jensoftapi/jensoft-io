@@ -134,7 +134,8 @@ JenSoft.Catalog = function(config){
 		//var catalogBaseContext = '/catalog/'+catalogGroup.replace('.','/')+'/'+catalogArtifact;
 		//var catalogBaseContext = catalogGroup.replace('.','/')+'/'+catalogArtifact;
 		//return catalogBaseContext;
-		return "http://jensoft.io/";
+		//return "http://jensoft.io/";
+		return "";
 	}
 
 	/**
