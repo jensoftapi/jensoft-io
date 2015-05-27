@@ -29,10 +29,6 @@
 ${ui-jar-resources}
 	</resources>
 
-	<security>
-	   <all-permissions/>
-	</security>
-	
 	<application-desc main-class="${frame-ui}">
 		<argument>${ui-class}</argument>
 	</application-desc>
