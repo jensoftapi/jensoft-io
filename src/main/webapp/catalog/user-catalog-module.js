@@ -28,7 +28,7 @@ prettyPrint = function(){
 
 
 var JenSoft ={};
-JenSoft.CatalogServer ='';
+
 function getCatalogInstance(group,artifact){
 	return window["jensoft_cat_"+group.replace('.','_')+'_'+artifact.replace('-','_')];
 }
@@ -122,21 +122,9 @@ JenSoft.Catalog = function(config){
 	 * get catalog base : /server/URI
 	 */
 	function getCatalogBase(){	
-		var catalogAPIContext = JenSoft.CatalogServer+getCatalogURI();
-		//alert("Catalog base : "+catalogAPIContext);
-		return catalogAPIContext;
-	}
-
-	/**
-	 * get catalog URI which looks like : /catalog/group/artifact
-	 */
-	function getCatalogURI(){
-		//var catalogBaseContext = '/catalog/'+catalogGroup.replace('.','/')+'/'+catalogArtifact;
-		//var catalogBaseContext = catalogGroup.replace('.','/')+'/'+catalogArtifact;
-		//return catalogBaseContext;
-		//return "http://jensoft.io/";
 		return "";
 	}
+
 
 	/**
 	 * get catalog api context : /server/URI/api
