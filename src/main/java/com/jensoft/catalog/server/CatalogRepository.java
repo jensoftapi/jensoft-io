@@ -210,7 +210,9 @@ public class CatalogRepository implements ServletContextListener {
 			InputStream jnlpTemplate = this.getClass().getClassLoader().getResourceAsStream("frame-ui.jnlp");
 			ResourceBundle res = ResourceBundle.getBundle("catalog");
 			server = res.getString("catalog.server");
-			contextPath = ctx.getServletContext().getContextPath();
+			
+			//contextPath = ctx.getServletContext().getContextPath();
+			contextPath = "";
 			
 			logger.info("Catalog context path is  : " + contextPath);
 			
